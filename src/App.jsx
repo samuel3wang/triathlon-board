@@ -29,7 +29,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="header-inner">
-          <h1 className="site-title">台灣鐵人三項排行榜</h1>
+          <h1 className="site-title">臺灣超級鐵人三項排行榜</h1>
           <p className="site-subtitle">Taiwan Triathlon Leaderboard</p>
         </div>
       </header>
@@ -57,7 +57,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>台灣鐵人三項排行榜 &copy; {new Date().getFullYear()}</p>
+        <p>臺灣超級鐵人三項排行榜 &copy; {new Date().getFullYear()}</p>
         <p className="footer-note">資料僅供參考，如有錯誤歡迎來信指正</p>
       </footer>
     </div>
