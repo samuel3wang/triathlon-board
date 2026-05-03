@@ -1,0 +1,23 @@
+{
+  "title": "2026 女子超級半鐵人三項 Sub 5",
+  "subtitle": "Distance (113km: Swim 1.9km / Bike 90km / Run 21.0975km)",
+  "category": "female",
+  "distance": "half",
+  "lastUpdated": "2026-05-01",
+  "notes": [
+    ""
+  ],
+  "athletes": [
+    {
+      "rank": 1,
+      "name": "123",
+      "totalTime": "",
+      "swimTime": "",
+      "bikeTime": "",
+      "runTime": "",
+      "birthYear": 1,
+      "raceName": "",
+      "date": ""
+    }
+  ]
+}

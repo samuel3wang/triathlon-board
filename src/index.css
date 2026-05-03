@@ -1,0 +1,40 @@
+:root {
+  --primary: #0170B9;
+  --primary-dark: #015a94;
+  --primary-light: #e8f4fc;
+  --text: #4B4F58;
+  --text-heading: #1a1a2e;
+  --bg: #f8f9fa;
+  --white: #ffffff;
+  --border: #e0e0e0;
+  --gray-light: #f5f5f5;
+  --swim-color: #333;
+  --bike-color: #333;
+  --run-color: #333;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  --sans: 'Noto Sans TC', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

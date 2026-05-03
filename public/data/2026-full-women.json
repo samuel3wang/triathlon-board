@@ -1,0 +1,84 @@
+{
+  "title": "2026 女子超級鐵人三項 Sub 11",
+  "subtitle": "Distance (226km: Swim 3.8km / Bike 180km / Run 42.195km)",
+  "category": "female",
+  "distance": "full",
+  "lastUpdated": "2026-05-01",
+  "notes": [
+    ""
+  ],
+  "athletes": [
+    {
+      "rank": 1,
+      "name": "李筱瑜",
+      "totalTime": "9:37:10",
+      "swimTime": "01:06:11",
+      "bikeTime": "05:04:01",
+      "runTime": "03:21:18",
+      "raceName": "2017 IM Frankfurt"
+    },
+    {
+      "rank": 2,
+      "name": "陳俐妘",
+      "totalTime": "9:56:59",
+      "swimTime": "01:18:29",
+      "bikeTime": "04:58:15",
+      "runTime": "03:29:34",
+      "raceName": "2023 Challenge Taiwan"
+    },
+    {
+      "rank": 3,
+      "name": "郭家齊",
+      "totalTime": "10:09:12",
+      "swimTime": "01:01:55",
+      "bikeTime": "05:15:59",
+      "runTime": "03:46:08",
+      "raceName": "2023 普悠瑪"
+    },
+    {
+      "rank": 4,
+      "name": "黃怡佳",
+      "totalTime": "10:35:04",
+      "swimTime": "01:17:13",
+      "bikeTime": "05:21:32",
+      "runTime": "03:42:16",
+      "raceName": "2024 普悠瑪"
+    },
+    {
+      "rank": 5,
+      "name": "許靜怡",
+      "totalTime": "10:46:56",
+      "swimTime": "01:24:26",
+      "bikeTime": "05:22:22",
+      "runTime": "03:54:13",
+      "raceName": "2025 普悠瑪"
+    },
+    {
+      "rank": 6,
+      "name": "洪筱婷",
+      "totalTime": "10:49:19",
+      "swimTime": "01:19:37",
+      "bikeTime": "05:27:49",
+      "runTime": "03:52:20",
+      "raceName": "2023 普悠瑪"
+    },
+    {
+      "rank": 7,
+      "name": "郭慧希",
+      "totalTime": "10:49:53",
+      "swimTime": "01:18:00",
+      "bikeTime": "05:24:55",
+      "runTime": "03:59:48",
+      "raceName": "2024 普悠瑪"
+    },
+    {
+      "rank": 8,
+      "name": "鍾天晴",
+      "totalTime": "10:56:36",
+      "swimTime": "01:29:33",
+      "bikeTime": "05:34:36",
+      "runTime": "03:44:00",
+      "raceName": "2023 普悠瑪"
+    }
+  ]
+}
