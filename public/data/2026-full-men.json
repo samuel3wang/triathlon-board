@@ -4,9 +4,7 @@
   "category": "male",
   "distance": "full",
   "lastUpdated": "2026-05-01",
-  "notes": [
-    ""
-  ],
+  "notes": [""],
   "athletes": [
     {
       "rank": 1,
@@ -91,7 +89,7 @@
     },
     {
       "rank": 10,
-      "name": "*羅譽寅",
+      "name": "羅譽寅",
       "totalTime": "9:15:17",
       "swimTime": "01:16:10",
       "bikeTime": "04:33:50",
@@ -118,21 +116,21 @@
     },
     {
       "rank": 13,
+      "name": "王志袁",
+      "totalTime": "9:22:03",
+      "swimTime": "01:16:43",
+      "bikeTime": "04:50:23",
+      "runTime": "03:04:27",
+      "raceName": "2026 IM Tours Métropole"
+    },
+    {
+      "rank": 14,
       "name": "江立堯",
       "totalTime": "9:25:44",
       "swimTime": "01:13:17",
       "bikeTime": "04:54:54",
       "runTime": "03:05:13",
       "raceName": "2026 Challenge Taiwan"
-    },
-    {
-      "rank": 14,
-      "name": "王志袁",
-      "totalTime": "9:31:38",
-      "swimTime": "01:08:27",
-      "bikeTime": "04:59:25",
-      "runTime": "03:18:08",
-      "raceName": "2022 IM Taiwan"
     },
     {
       "rank": 15,
