@@ -7,6 +7,7 @@ const BOARDS = [
   { label: '女子超鐵', file: 'data/2026-full-women.json' },
   { label: '男子半超鐵', file: 'data/2026-half-men.json' },
   { label: '女子半超鐵', file: 'data/2026-half-women.json' },
+  { label: '完成 Kona', file: 'data/2026-kona.json' },
 ]
 
 function App() {
@@ -31,6 +32,14 @@ function App() {
         <div className="header-inner">
           <h1 className="site-title">臺灣超級鐵人三項排行榜</h1>
           <p className="site-subtitle">Taiwan Triathlon Leaderboard</p>
+          <a
+            className="upload-btn"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSciUAxRAHsgDp5mudqRf3zA5Bfwi89146BV4PLHe0Z31hfwIg/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            上傳成績
+          </a>
         </div>
       </header>
 
@@ -59,6 +68,9 @@ function App() {
       <footer className="footer">
         <p>臺灣超級鐵人三項排行榜 &copy; {new Date().getFullYear()}</p>
         <p className="footer-note">資料僅供參考，如有錯誤歡迎來信指正</p>
+        <p className="footer-contact">
+          意見信箱 - <a href="mailto:a22410570@yahoo.com.tw">a22410570@yahoo.com.tw</a>
+        </p>
       </footer>
     </div>
   )

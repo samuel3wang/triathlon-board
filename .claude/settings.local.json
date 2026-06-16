@@ -7,7 +7,8 @@
       "Bash(rm -rf triathlon-app)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(npx vite *)"
     ]
   }
 }
