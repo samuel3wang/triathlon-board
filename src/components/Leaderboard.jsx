@@ -1,34 +1,75 @@
-import { useState, useMemo } from 'react'
+import { Fragment, useState, useMemo } from 'react'
 import './Leaderboard.css'
+
+const TIME_FIELDS = new Set(['totalTime', 'swimTime', 't1', 'bikeTime', 't2', 'runTime'])
+
+const COL_COUNT = 9
+
+const timeToSeconds = (t) => {
+  if (!t || typeof t !== 'string') return Infinity
+  const parts = t.split(':').map(Number)
+  if (parts.some(Number.isNaN)) return Infinity
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2]
+  if (parts.length === 2) return parts[0] * 60 + parts[1]
+  return Infinity
+}
+
+const sortAthletes = (list, sortField, sortDir) => {
+  const field = sortField || 'totalTime'
+  const dir = sortField ? sortDir : 'asc'
+  return [...list].sort((a, b) => {
+    let va = a[field]
+    let vb = b[field]
+    if (TIME_FIELDS.has(field)) {
+      va = timeToSeconds(va)
+      vb = timeToSeconds(vb)
+    } else {
+      if (typeof va === 'string') va = va.toLowerCase()
+      if (typeof vb === 'string') vb = vb.toLowerCase()
+    }
+    if (va < vb) return dir === 'asc' ? -1 : 1
+    if (va > vb) return dir === 'asc' ? 1 : -1
+    return 0
+  })
+}
 
 function Leaderboard({ data }) {
   const [search, setSearch] = useState('')
   const [sortField, setSortField] = useState(null)
   const [sortDir, setSortDir] = useState('asc')
 
-  const filtered = useMemo(() => {
-    let list = data.athletes
+  const isKona = data.category === 'kona'
+
+  const { groups, totalCount } = useMemo(() => {
+    let list = data.athletes || []
     if (search.trim()) {
       const q = search.trim().toLowerCase()
       list = list.filter(
         a =>
-          a.name.toLowerCase().includes(q) ||
-          a.raceName.toLowerCase().includes(q)
+          (a.name || '').toLowerCase().includes(q) ||
+          (a.raceName || '').toLowerCase().includes(q)
       )
     }
-    if (sortField) {
-      list = [...list].sort((a, b) => {
-        let va = a[sortField]
-        let vb = b[sortField]
-        if (typeof va === 'string') va = va.toLowerCase()
-        if (typeof vb === 'string') vb = vb.toLowerCase()
-        if (va < vb) return sortDir === 'asc' ? -1 : 1
-        if (va > vb) return sortDir === 'asc' ? 1 : -1
-        return 0
-      })
+
+    if (isKona) {
+      const women = list.filter(a => a.gender === 'female')
+      const men = list.filter(a => a.gender === 'male')
+      const sortedWomen = sortAthletes(women, sortField, sortDir)
+      const sortedMen = sortAthletes(men, sortField, sortDir)
+      return {
+        groups: [
+          { label: '女子', rows: sortedWomen },
+          { label: '男子', rows: sortedMen },
+        ],
+        totalCount: sortedWomen.length + sortedMen.length,
+      }
     }
-    return list
-  }, [data.athletes, search, sortField, sortDir])
+
+    const sorted = sortField
+      ? sortAthletes(list, sortField, sortDir)
+      : list
+    return { groups: [{ label: null, rows: sorted }], totalCount: sorted.length }
+  }, [data.athletes, search, sortField, sortDir, isKona])
 
   const handleSort = (field) => {
     if (sortField === field) {
@@ -70,7 +111,7 @@ function Leaderboard({ data }) {
         />
         {search && (
           <span className="result-count">
-            找到 {filtered.length} 筆結果
+            找到 {totalCount} 筆結果
           </span>
         )}
       </div>
@@ -89,8 +130,14 @@ function Leaderboard({ data }) {
               <th className="col-split col-swim sortable" onClick={() => handleSort('swimTime')}>
                 游泳{sortIcon('swimTime')}
               </th>
+              <th className="col-split col-transition sortable" onClick={() => handleSort('t1')}>
+                T1{sortIcon('t1')}
+              </th>
               <th className="col-split col-bike sortable" onClick={() => handleSort('bikeTime')}>
                 自行車{sortIcon('bikeTime')}
+              </th>
+              <th className="col-split col-transition sortable" onClick={() => handleSort('t2')}>
+                T2{sortIcon('t2')}
               </th>
               <th className="col-split col-run sortable" onClick={() => handleSort('runTime')}>
                 跑步{sortIcon('runTime')}
@@ -100,21 +147,35 @@ function Leaderboard({ data }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((a, i) => (
-              <tr key={i} className={a.rank <= 3 ? `top-${a.rank}` : ''}>
-                <td className="col-rank">
-                  <span className={`rank-badge ${a.rank <= 3 ? `rank-${a.rank}` : ''}`}>
-                    {a.rank}
-                  </span>
-                </td>
-                <td className="col-name">{a.name}</td>
-                <td className="col-total">{a.totalTime}</td>
-                <td className="col-split col-swim">{a.swimTime}</td>
-                <td className="col-split col-bike">{a.bikeTime}</td>
-                <td className="col-split col-run">{a.runTime}</td>
-                <td className="col-race">{a.raceName}</td>
-
-              </tr>
+            {groups.map((group, gi) => (
+              <Fragment key={gi}>
+                {group.label && group.rows.length > 0 && (
+                  <tr className="group-header">
+                    <td colSpan={COL_COUNT}>{group.label}</td>
+                  </tr>
+                )}
+                {group.rows.map((a, i) => {
+                  const displayRank = isKona ? i + 1 : a.rank
+                  const isTop = displayRank <= 3
+                  return (
+                    <tr key={`${gi}-${i}`} className={isTop ? `top-${displayRank}` : ''}>
+                      <td className="col-rank">
+                        <span className={`rank-badge ${isTop ? `rank-${displayRank}` : ''}`}>
+                          {displayRank}
+                        </span>
+                      </td>
+                      <td className="col-name">{a.name}</td>
+                      <td className="col-total">{a.totalTime}</td>
+                      <td className="col-split col-swim">{a.swimTime}</td>
+                      <td className="col-split col-transition">{a.t1 || '—'}</td>
+                      <td className="col-split col-bike">{a.bikeTime}</td>
+                      <td className="col-split col-transition">{a.t2 || '—'}</td>
+                      <td className="col-split col-run">{a.runTime}</td>
+                      <td className="col-race">{a.raceName}</td>
+                    </tr>
+                  )
+                })}
+              </Fragment>
             ))}
           </tbody>
         </table>

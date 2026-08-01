@@ -115,6 +115,23 @@
   background: var(--primary-light);
 }
 
+.ranking-table tbody tr.group-header {
+  background: var(--gray-light);
+}
+
+.ranking-table tbody tr.group-header:hover {
+  background: var(--gray-light);
+}
+
+.ranking-table tbody tr.group-header td {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-heading);
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border);
+  letter-spacing: 0.05em;
+}
+
 .ranking-table tbody tr.top-1 {
   background: rgba(255, 215, 0, 0.08);
 }
@@ -185,6 +202,11 @@
   color: var(--run-color);
 }
 
+.col-transition {
+  color: var(--text);
+  opacity: 0.65;
+}
+
 .col-birth {
   text-align: center;
 }
@@ -229,6 +251,11 @@
 }
 
 @media (max-width: 768px) {
+  /* 手機不顯示 T1 / T2，維持與加欄位前相同的版面 */
+  .ranking-table th.col-transition,
+  .ranking-table td.col-transition {
+    display: none;
+  }
   .board-header {
     padding: 16px;
   }
