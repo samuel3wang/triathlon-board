@@ -80,6 +80,15 @@
     },
     {
       "rank": 9,
+      "name": "張邦晏",
+      "totalTime": "9:10:18",
+      "swimTime": "01:05:29",
+      "bikeTime": "04:34:02",
+      "runTime": "03:25:02",
+      "raceName": "2026IM Canada-Ottawa"
+    },
+    {
+      "rank": 10,
       "name": "何孟橋",
       "totalTime": "9:10:55",
       "swimTime": "00:59:10",
@@ -88,7 +97,7 @@
       "raceName": "2025 興·泉滴水湖大鐵"
     },
     {
-      "rank": 10,
+      "rank": 11,
       "name": "羅譽寅",
       "totalTime": "9:15:17",
       "swimTime": "01:16:10",
@@ -97,7 +106,7 @@
       "raceName": "2026 Challenge Taiwan"
     },
     {
-      "rank": 11,
+      "rank": 12,
       "name": "楊茂雍",
       "totalTime": "9:16:07",
       "swimTime": "00:52:28",
@@ -106,7 +115,7 @@
       "raceName": "2014 Challenge Taiwan"
     },
     {
-      "rank": 12,
+      "rank": 13,
       "name": "王金晴",
       "totalTime": "9:19:35",
       "swimTime": "01:13:08",
@@ -115,7 +124,7 @@
       "raceName": "2021 Challenge Taiwan"
     },
     {
-      "rank": 13,
+      "rank": 14,
       "name": "王志袁",
       "totalTime": "9:22:03",
       "swimTime": "01:16:43",
@@ -124,7 +133,7 @@
       "raceName": "2026 IM Tours Métropole"
     },
     {
-      "rank": 14,
+      "rank": 15,
       "name": "江立堯",
       "totalTime": "9:25:44",
       "swimTime": "01:13:17",
@@ -133,7 +142,7 @@
       "raceName": "2026 Challenge Taiwan"
     },
     {
-      "rank": 15,
+      "rank": 16,
       "name": "廖斌宏",
       "totalTime": "9:32:02",
       "swimTime": "01:13:44",
@@ -142,7 +151,7 @@
       "raceName": "2024 Challenge Roth"
     },
     {
-      "rank": 16,
+      "rank": 17,
       "name": "謝漢霖",
       "totalTime": "9:33:21",
       "swimTime": "00:51:13",
@@ -151,7 +160,7 @@
       "raceName": "2019 IM Taiwan"
     },
     {
-      "rank": 17,
+      "rank": 18,
       "name": "陳永慶",
       "totalTime": "9:36:32",
       "swimTime": "01:16:47",
@@ -160,7 +169,7 @@
       "raceName": "2020 普悠瑪"
     },
     {
-      "rank": 18,
+      "rank": 19,
       "name": "朱昶宇",
       "totalTime": "9:37:30",
       "swimTime": "01:13:51",
@@ -169,7 +178,7 @@
       "raceName": "2023 普悠瑪"
     },
     {
-      "rank": 19,
+      "rank": 20,
       "name": "葛芃欣",
       "totalTime": "9:39:23",
       "swimTime": "01:10:24",
@@ -178,7 +187,7 @@
       "raceName": "2026 普悠瑪"
     },
     {
-      "rank": 20,
+      "rank": 21,
       "name": "李長泰",
       "totalTime": "9:40:10",
       "swimTime": "01:06:26",
@@ -187,7 +196,7 @@
       "raceName": "2022 IM Taiwan"
     },
     {
-      "rank": 21,
+      "rank": 22,
       "name": "徐國峰",
       "totalTime": "9:44:20",
       "swimTime": "01:07:11",
@@ -196,7 +205,7 @@
       "raceName": "2012 臺東超鐵"
     },
     {
-      "rank": 22,
+      "rank": 23,
       "name": "范永奕",
       "totalTime": "9:46:18",
       "swimTime": "01:16:19",
@@ -205,7 +214,7 @@
       "raceName": "2017 Challenge Taiwan"
     },
     {
-      "rank": 23,
+      "rank": 24,
       "name": "柯俞東",
       "totalTime": "9:46:44",
       "swimTime": "01:16:09",
@@ -214,7 +223,7 @@
       "raceName": "2019 IM Taiwan"
     },
     {
-      "rank": 24,
+      "rank": 25,
       "name": "賴錦源",
       "totalTime": "9:47:18",
       "swimTime": "01:09:37",
@@ -223,7 +232,7 @@
       "raceName": "2017 普悠瑪"
     },
     {
-      "rank": 25,
+      "rank": 26,
       "name": "李高偉",
       "totalTime": "9:49:25",
       "swimTime": "01:00:42",
@@ -232,7 +241,7 @@
       "raceName": "2017 普悠瑪"
     },
     {
-      "rank": 26,
+      "rank": 27,
       "name": "李憲宗",
       "totalTime": "9:50:17",
       "swimTime": "01:18:35",
@@ -241,7 +250,7 @@
       "raceName": "2020 普悠瑪"
     },
     {
-      "rank": 27,
+      "rank": 28,
       "name": "郭丁元",
       "totalTime": "9:51:31",
       "swimTime": "01:09:49",
@@ -250,7 +259,7 @@
       "raceName": "2026 Challenge Taiwan"
     },
     {
-      "rank": 28,
+      "rank": 29,
       "name": "林岳岡",
       "totalTime": "9:53:05",
       "swimTime": "01:08:34",
@@ -259,7 +268,7 @@
       "raceName": "2019 IM Taiwan"
     },
     {
-      "rank": 29,
+      "rank": 30,
       "name": "鍾瑋剛",
       "totalTime": "9:54:05",
       "swimTime": "01:12:47",
@@ -268,7 +277,7 @@
       "raceName": "2023 Challenge Taiwan"
     },
     {
-      "rank": 30,
+      "rank": 31,
       "name": "魏冠倫",
       "totalTime": "9:54:59",
       "swimTime": "01:14:27",
@@ -277,7 +286,7 @@
       "raceName": "2021 普悠瑪"
     },
     {
-      "rank": 31,
+      "rank": 32,
       "name": "李逸軒",
       "totalTime": "9:56:26",
       "swimTime": "01:06:01",
@@ -286,7 +295,7 @@
       "raceName": "2025 普悠瑪"
     },
     {
-      "rank": 32,
+      "rank": 33,
       "name": "陳遇助",
       "totalTime": "9:57:55",
       "swimTime": "01:19:08",
@@ -295,7 +304,7 @@
       "raceName": "2026 Challenge Taiwan"
     },
     {
-      "rank": 33,
+      "rank": 34,
       "name": "梁騰瑜",
       "totalTime": "9:59:27",
       "swimTime": "00:54:41",
@@ -304,7 +313,7 @@
       "raceName": "2019 IM Taiwan"
     },
     {
-      "rank": 34,
+      "rank": 35,
       "name": "寇大龍",
       "totalTime": "9:59:37",
       "swimTime": "00:56:50",
@@ -313,7 +322,7 @@
       "raceName": "2016 IM South Africa"
     },
     {
-      "rank": 35,
+      "rank": 36,
       "name": "梁祐榮",
       "totalTime": "9:59:49",
       "swimTime": "01:00:59",
