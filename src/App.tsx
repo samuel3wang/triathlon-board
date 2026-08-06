@@ -77,6 +77,7 @@ function App() {
         <p className="footer-contact">
           意見信箱 - <a href="mailto:a22410570@yahoo.com.tw">a22410570@yahoo.com.tw</a>
         </p>
+        <p className="footer-version">{__COMMIT_SHA__}</p>
       </footer>
     </div>
   )

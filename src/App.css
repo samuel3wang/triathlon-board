@@ -129,6 +129,13 @@
   color: white;
 }
 
+.footer-version {
+  margin-top: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  opacity: 0.35;
+}
+
 @media (max-width: 768px) {
   .site-title {
     font-size: 1.5rem;
