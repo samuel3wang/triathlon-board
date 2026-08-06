@@ -34,6 +34,8 @@ The site deploys to GitHub Pages (`.github/workflows/deploy.yml`, on push to `ma
 
 `vite.config.ts` therefore sets `base: './'`, so one build is correct in both places and moving between them needs no rebuild. An absolute base breaks every asset the moment the site moves — that failure mode cost a day once.
 
+`actions/deploy-pages` polls the Pages API every 5s and gives up after 10 minutes — and that ceiling is **not configurable**: the action clamps its own `timeout` input with `Math.min(input, 600000)`. A deploy that overruns it fails no matter what the workflow says, so the deployment itself has to be fast. It was ~12s until the custom domain was set on 2026-08-06, then 4-10 min, then consistently over the ceiling. A custom domain also needs a `CNAME` file in the published artifact (`public/CNAME`), which the site went without until then.
+
 The footer prints `__COMMIT_SHA__`, injected by `define` in `vite.config.ts` from `git rev-parse --short HEAD`. Read it to tell which commit a visitor is actually running: the Pages CDN caches HTML for 10 minutes (`max-age=600`, not configurable), so what a browser receives can lag what Environments → `github-pages` reports as Active. Because the sha ships inside the hashed JS, it can never disagree with the assets around it.
 
 Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_URL`, as `App.tsx` does; it compiles to `` fetch(`./` + file) ``, resolved against the page URL. A bare `/data/...` would 404 under the subpath. The one requirement a relative base adds is a trailing slash on the page URL — GitHub Pages 301s directory URLs to add it, and the app has no client-side router, so nested paths never arise.

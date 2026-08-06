@@ -44,9 +44,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Do not try to raise the `timeout` input: the action clamps it with
+      # `Math.min(input, 600000)`, so 10 minutes is a hard ceiling. If a deploy
+      # overruns it, the deploy itself has to get faster — see CLAUDE.md.
       - id: deployment
         uses: actions/deploy-pages@v5
-        with:
-          # Pages has been taking 8-10 min per deploy since the custom domain
-          # was set, overrunning the 10 min default. Milliseconds.
-          timeout: 1800000
