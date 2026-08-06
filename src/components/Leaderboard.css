@@ -251,11 +251,7 @@
 }
 
 @media (max-width: 768px) {
-  /* 手機不顯示 T1 / T2，維持與加欄位前相同的版面 */
-  .ranking-table th.col-transition,
-  .ranking-table td.col-transition {
-    display: none;
-  }
+  /* T1+T2 是單一欄位，手機與桌機顯示相同的欄位 */
   .board-header {
     padding: 16px;
   }

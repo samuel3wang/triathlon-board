@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Leaderboard from './components/Leaderboard'
-import type { Board } from './types'
+import { normalizeBoard } from './board'
+import type { Board, ViewBoard } from './types'
 import './App.css'
 
 interface BoardSource {
@@ -18,7 +19,7 @@ const BOARDS: BoardSource[] = [
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [data, setData] = useState<Board | null>(null)
+  const [data, setData] = useState<ViewBoard | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,7 +27,8 @@ function App() {
     fetch(import.meta.env.BASE_URL + BOARDS[activeIndex].file)
       .then(res => res.json() as Promise<Board>)
       .then(json => {
-        setData(json)
+        // Ranks, T1+T2 and the parsed seconds are computed once, here — not on render.
+        setData(normalizeBoard(json))
         setLoading(false)
       })
       .catch(() => setLoading(false))

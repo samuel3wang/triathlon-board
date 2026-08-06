@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read # deploy-pages resolves the artifact by id; without this it 403s
 
 concurrency:
   group: pages
@@ -18,17 +19,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # These majors all run on node24; v4/v3 ran on the now-deprecated node20.
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # stamp-updated reads each data file's commit date
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run stamp
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      # v4+ excludes dotfiles from the artifact; dist/ has none that matter.
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -40,4 +43,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

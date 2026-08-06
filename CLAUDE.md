@@ -42,15 +42,22 @@ Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_
 
 `src/types.ts` is the single source of truth for the board JSON shape (`Board`, `Athlete`). Nothing validates the JSON at runtime — the fetch is cast to `Board`, so a malformed data file is a runtime problem, not a compile-time one. Keep `src/types.ts` in step with `public/data/*.json` by hand.
 
-`t1`/`t2` are optional and render as `—` when absent (most historical rows have no transition splits). Some rows carry `birthYear` / `date`, which nothing displays yet.
+**Adding an athlete = appending one object anywhere in `athletes`.** There is no `rank` field in the JSON and nothing in the file has to be re-ordered or renumbered: `normalizeBoard` (`src/board.ts`) derives everything the table needs, once, right after the fetch.
 
-`lastUpdated` is **not** maintained by hand. `scripts/stamp-updated.mjs` (run as `npm run stamp` in the deploy workflow, before `npm run build`) overwrites it with the date that data file was last committed, in `Asia/Taipei`. The value sitting in the repo is therefore cosmetic — only the dev server shows it. This is why the workflow checks out with `fetch-depth: 0`; a shallow clone has no per-file history and the stamp falls back to today.
+`src/board.ts` is the whole derivation layer. It runs once per board — never during render or sorting — and returns a `ViewBoard` whose rows carry:
 
-Two behaviours branch on `category === 'kona'`:
+- `rank` — position by `totalTime`, fastest first. Equal times share a rank and the next one skips (1, 2, 2, 4). Rows with no usable `totalTime` sink to the bottom in file order.
+- `transitionTime` — `t1 + t2` merged into the single **T1+T2** column the table renders (`—` when the row has neither). The two fields stay separate in the JSON.
+- `secs` — every time column pre-parsed to seconds, so sorting compares numbers and never re-parses a string.
 
-- **Normal boards**: `rank` is stored in the file and displayed verbatim; the default (unsorted) view is simply the file's array order. So the array must stay sorted by `rank`, and inserting an athlete means renumbering every entry below them.
-- **Kona board**: rows are split into 女子/男子 groups by an `athletes[].gender` field (`'female'`/`'male'`) and rank is computed as the position within each group, ignoring any stored `rank`.
+`timeToSeconds` accepts `H:MM:SS`, `MM:SS`, or a bare number of seconds (`"90"` or `90`); anything else is `Infinity` and sorts last. `secondsToTime` prints `M:SS` under an hour, `H:MM:SS` at or above one — so `t1: "3:30"` + `t2: "2:40"` displays as `6:10`.
+
+Some rows carry `birthYear` / `date`, which nothing displays yet.
+
+`lastUpdated` is **not** maintained by hand. `scripts/stamp-updated.ts` (run as `npm run stamp` in the deploy workflow, before `npm run build`) overwrites it with the date that data file was last committed, in `Asia/Taipei`. The value sitting in the repo is therefore cosmetic — only the dev server shows it, and `npm run stamp` fixes that locally too. This is why the workflow checks out with `fetch-depth: 0`; a shallow clone has no per-file history and the stamp falls back to today.
+
+One behaviour branches on `category === 'kona'`: those rows are split into 女子/男子 groups by an `athletes[].gender` field (`'female'`/`'male'`), keep their file order, and take their rank from the position within each group. `normalizeBoard` deliberately leaves Kona rows unsorted and their `rank` undefined — it is a finisher list, not a race.
 
 ### Sorting
 
-`TIME_FIELDS` names the columns parsed by `timeToSeconds` (`H:MM:SS` or `MM:SS`); unparseable or missing values sort to the end via `Infinity`. Everything else compares as lowercased strings. Clicking a header cycles asc → desc → unsorted (back to file order). `COL_COUNT` is the `colSpan` for group-header rows and must be kept in sync with the number of `<th>` elements.
+Header clicks sort on `secs[field]` (already numeric) or, for 選手姓名, a lowercased string. Clicking a header cycles asc → desc → unsorted; unsorted means the `normalizeBoard` order, i.e. rank order. `COL_COUNT` is the `colSpan` for group-header rows and must be kept in sync with the number of `<th>` elements (currently 8: 排名 / 選手姓名 / 總成績 / 游泳 / 自行車 / 跑步 / T1+T2 / 賽會名稱, the same set on mobile and desktop).

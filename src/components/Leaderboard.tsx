@@ -1,43 +1,29 @@
 import { Fragment, useState, useMemo } from 'react'
-import type { Athlete, Board, SortDir, SortField } from '../types'
+import type { SortDir, SortField, ViewAthlete, ViewBoard } from '../types'
 import './Leaderboard.css'
 
-const TIME_FIELDS: ReadonlySet<SortField> = new Set<SortField>([
-  'totalTime',
-  'swimTime',
-  't1',
-  'bikeTime',
-  't2',
-  'runTime',
-])
+const COL_COUNT = 8
 
-const COL_COUNT = 9
-
-const timeToSeconds = (t: string | undefined): number => {
-  if (!t || typeof t !== 'string') return Infinity
-  const parts = t.split(':').map(Number)
-  if (parts.some(Number.isNaN)) return Infinity
-  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2]
-  if (parts.length === 2) return parts[0] * 60 + parts[1]
-  return Infinity
-}
-
+/**
+ * Every column but 名字 is a time, and `normalizeBoard` already parsed those to
+ * seconds — so a compare here is a number compare, never a string parse.
+ */
 const sortAthletes = (
-  list: Athlete[],
+  list: ViewAthlete[],
   sortField: SortField | null,
   sortDir: SortDir
-): Athlete[] => {
+): ViewAthlete[] => {
   const field: SortField = sortField ?? 'totalTime'
   const dir: SortDir = sortField ? sortDir : 'asc'
   return [...list].sort((a, b) => {
     let va: string | number
     let vb: string | number
-    if (TIME_FIELDS.has(field)) {
-      va = timeToSeconds(a[field])
-      vb = timeToSeconds(b[field])
+    if (field === 'name') {
+      va = (a.name ?? '').toLowerCase()
+      vb = (b.name ?? '').toLowerCase()
     } else {
-      va = (a[field] ?? '').toLowerCase()
-      vb = (b[field] ?? '').toLowerCase()
+      va = a.secs[field]
+      vb = b.secs[field]
     }
     if (va < vb) return dir === 'asc' ? -1 : 1
     if (va > vb) return dir === 'asc' ? 1 : -1
@@ -47,11 +33,11 @@ const sortAthletes = (
 
 interface Group {
   label: string | null
-  rows: Athlete[]
+  rows: ViewAthlete[]
 }
 
 interface LeaderboardProps {
-  data: Board
+  data: ViewBoard
 }
 
 function Leaderboard({ data }: LeaderboardProps) {
@@ -151,17 +137,17 @@ function Leaderboard({ data }: LeaderboardProps) {
               <th className="col-split col-swim sortable" onClick={() => handleSort('swimTime')}>
                 游泳{sortIcon('swimTime')}
               </th>
-              <th className="col-split col-transition sortable" onClick={() => handleSort('t1')}>
-                T1{sortIcon('t1')}
-              </th>
               <th className="col-split col-bike sortable" onClick={() => handleSort('bikeTime')}>
                 自行車{sortIcon('bikeTime')}
               </th>
-              <th className="col-split col-transition sortable" onClick={() => handleSort('t2')}>
-                T2{sortIcon('t2')}
-              </th>
               <th className="col-split col-run sortable" onClick={() => handleSort('runTime')}>
                 跑步{sortIcon('runTime')}
+              </th>
+              <th
+                className="col-split col-transition sortable"
+                onClick={() => handleSort('transitionTime')}
+              >
+                T1+T2{sortIcon('transitionTime')}
               </th>
               <th className="col-race">賽會名稱</th>
 
@@ -188,10 +174,9 @@ function Leaderboard({ data }: LeaderboardProps) {
                       <td className="col-name">{a.name}</td>
                       <td className="col-total">{a.totalTime}</td>
                       <td className="col-split col-swim">{a.swimTime}</td>
-                      <td className="col-split col-transition">{a.t1 || '—'}</td>
                       <td className="col-split col-bike">{a.bikeTime}</td>
-                      <td className="col-split col-transition">{a.t2 || '—'}</td>
                       <td className="col-split col-run">{a.runTime}</td>
+                      <td className="col-split col-transition">{a.transitionTime || '—'}</td>
                       <td className="col-race">{a.raceName}</td>
                     </tr>
                   )

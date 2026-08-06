@@ -4,16 +4,15 @@ export type Category = 'male' | 'female' | 'kona'
 export type Distance = 'full' | 'half'
 export type Gender = 'male' | 'female'
 
+/** One row exactly as it is written by hand in `public/data/*.json`. */
 export interface Athlete {
-  /** Stored in the file for ranked boards; ignored on the Kona board, which counts positions per gender group. */
-  rank?: number
   name: string
   totalTime: string
   swimTime: string
   bikeTime: string
   runTime: string
   raceName: string
-  /** Transitions — absent on most historical rows, rendered as an em dash. */
+  /** Transitions — absent on most historical rows. Displayed summed as one T1+T2 column. */
   t1?: string
   t2?: string
   /** Only meaningful on the Kona board, where rows are grouped by it. */
@@ -34,14 +33,32 @@ export interface Board {
   athletes: Athlete[]
 }
 
-/** Columns the table can sort by. Every one of them holds a string. */
-export type SortField =
-  | 'name'
+/** Time columns, all pre-parsed to seconds by `normalizeBoard` so sorting never parses. */
+export type TimeField =
   | 'totalTime'
   | 'swimTime'
-  | 't1'
+  | 'transitionTime'
   | 'bikeTime'
-  | 't2'
   | 'runTime'
+
+/**
+ * A row after `normalizeBoard`: rank and the merged transition column are derived,
+ * never stored in the JSON.
+ */
+export interface ViewAthlete extends Athlete {
+  /** Position by `totalTime`, ties sharing a rank. Undefined on the Kona board, which counts per gender group. */
+  rank?: number
+  /** `t1 + t2`, formatted for display; empty when the row has neither. */
+  transitionTime: string
+  /** Every time column in seconds; missing/unparseable values are `Infinity` so they sort last. */
+  secs: Record<TimeField, number>
+}
+
+export interface ViewBoard extends Omit<Board, 'athletes'> {
+  athletes: ViewAthlete[]
+}
+
+/** Columns the table can sort by. */
+export type SortField = 'name' | TimeField
 
 export type SortDir = 'asc' | 'desc'
