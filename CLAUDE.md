@@ -30,7 +30,11 @@ All UI copy is Traditional Chinese.
 
 ### Deployment / base path
 
-`vite.config.js` sets `base: '/triathlon-board/'` because the site deploys to GitHub Pages (`.github/workflows/deploy.yml`, on push to `master`). Any runtime asset or data fetch **must** be prefixed with `import.meta.env.BASE_URL`, as `App.jsx` does — a bare `/data/...` path works in dev and 404s in production.
+The site deploys to GitHub Pages (`.github/workflows/deploy.yml`, on push to `master`), which serves it either from `samuel3wang.github.io/triathlon-board/` or from the root of a custom domain, depending on what Settings → Pages currently points at.
+
+`vite.config.ts` therefore sets `base: './'`, so one build is correct in both places and moving between them needs no rebuild. An absolute base breaks every asset the moment the site moves — that failure mode cost a day once.
+
+Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_URL`, as `App.tsx` does; it compiles to `` fetch(`./` + file) ``, resolved against the page URL. A bare `/data/...` would 404 under the subpath. The one requirement a relative base adds is a trailing slash on the page URL — GitHub Pages 301s directory URLs to add it, and the app has no client-side router, so nested paths never arise.
 
 ### Data contract
 
