@@ -36,13 +36,13 @@ The site deploys to GitHub Pages (`.github/workflows/deploy.yml`, on push to `ma
 
 **A red deploy job does not mean the site did not update.** `actions/deploy-pages` polls the Pages API every 5s and gives up after 10 minutes, and that ceiling is *not* configurable — the action clamps its own `timeout` input with `Math.min(input, 600000)`, so raising it is silently ignored. When Pages takes longer than that, the action reports failure and cancels, but the deployment often finishes on GitHub's side anyway a few minutes later and the content does go live. On 2026-08-06 a run whose job failed at 14:26 published at 14:29.
 
-So when a deploy "fails", check what is actually being served before changing anything:
+Because of that, `deploy-pages` runs with `continue-on-error: true` and a **Confirm the site is serving this commit** step decides the run instead: it polls the live site for up to 25 min and looks for this run's short sha inside the hashed JS bundle. Red now means the content genuinely never went live; green means it did, however long the action sulked. The same check by hand:
 
 ```bash
 curl -sSI https://triathlontw.com/ | grep -i last-modified   # when Pages last published
 ```
 
-That header is stamped when the deployment finished, and it is the only reading that cannot be argued with. `__COMMIT_SHA__` in the footer (below) tells you *which* commit that was.
+Remember the CDN caches HTML for 600s, so both readings can lag the deployment by up to 10 minutes.
 
 Deploys took ~12s until the custom domain was set on 2026-08-06, then 4-10 min, then consistently over the ceiling. Two things were missing: a `CNAME` file in the published artifact (`public/CNAME` — without it Pages re-derives the domain association on every deploy, and the DNS check in Settings flaps), and domain-ownership verification (a `_github-pages-challenge-samuel3wang` TXT record, still absent).
 

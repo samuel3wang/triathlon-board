@@ -44,8 +44,34 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Do not try to raise the `timeout` input: the action clamps it with
-      # `Math.min(input, 600000)`, so 10 minutes is a hard ceiling. A job that
-      # fails on it may still have published — see CLAUDE.md before reacting.
+      # The `timeout` input cannot be raised — the action clamps it with
+      # `Math.min(input, 600000)` — and Pages currently needs longer than that
+      # 10 min ceiling, then publishes anyway a few minutes after the action
+      # has given up. So its verdict is not evidence either way; the next step
+      # is what decides whether this run passes.
       - id: deployment
         uses: actions/deploy-pages@v5
+        continue-on-error: true
+
+      # Ask the live site what it is actually serving. `__COMMIT_SHA__` ships
+      # inside the hashed JS bundle (see CLAUDE.md), so finding this run's sha
+      # there means this exact build is live — nothing else is trusted.
+      - name: Confirm the site is serving this commit
+        run: |
+          sha="${GITHUB_SHA:0:7}"
+          site="${{ steps.deployment.outputs.page_url }}"
+          [ -n "$site" ] || site="https://triathlontw.com/"
+          site="${site%/}"
+          echo "looking for $sha on $site"
+          for i in $(seq 1 50); do
+            js=$(curl -sSL --max-time 20 "$site/" \
+                 | grep -oE 'assets/index-[A-Za-z0-9_-]+\.js' | head -1)
+            if [ -n "$js" ] && curl -sSL --max-time 30 "$site/$js" | grep -q "$sha"; then
+              echo "::notice::$site is serving $sha after $((i * 30))s"
+              exit 0
+            fi
+            sleep 30
+          done
+          # Pages caches HTML for 600s, so allow for a stale index.html above.
+          echo "::error::$site never served $sha - the deployment really did fail"
+          exit 1
