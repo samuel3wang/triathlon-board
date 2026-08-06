@@ -52,7 +52,6 @@ const toViewAthlete = (a: ViewAthlete | Board['athletes'][number]): ViewAthlete 
     secs: {
       totalTime: timeToSeconds(a.totalTime),
       swimTime: timeToSeconds(a.swimTime),
-      transitionTime: transition,
       bikeTime: timeToSeconds(a.bikeTime),
       runTime: timeToSeconds(a.runTime),
     },

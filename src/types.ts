@@ -4,7 +4,11 @@ export type Category = 'male' | 'female' | 'kona'
 export type Distance = 'full' | 'half'
 export type Gender = 'male' | 'female'
 
-/** One row exactly as it is written by hand in `public/data/*.json`. */
+/**
+ * One row exactly as it is written by hand in `public/data/*.json`. Every file
+ * carries all of these keys on every row, in this order, so a row can be copied
+ * and filled in; unknown values are `""` rather than omitted.
+ */
 export interface Athlete {
   name: string
   totalTime: string
@@ -12,14 +16,16 @@ export interface Athlete {
   bikeTime: string
   runTime: string
   raceName: string
-  /** Transitions — absent on most historical rows. Displayed summed as one T1+T2 column. */
-  t1?: string
-  t2?: string
   /** Only meaningful on the Kona board, where rows are grouped by it. */
   gender?: Gender
-  /** Present on some rows, not displayed yet. */
-  birthYear?: number
-  date?: string
+  /** Transitions, `""` when the source had none. Displayed summed as one T1+T2 column. */
+  t1: string
+  t2: string
+  /**
+   * Bookkeeping for the maintainer, never rendered: `1` once the result has
+   * been checked against a source, `0` (the default for a new row) until then.
+   */
+  verify: 0 | 1
 }
 
 export interface Board {
@@ -33,13 +39,12 @@ export interface Board {
   athletes: Athlete[]
 }
 
-/** Time columns, all pre-parsed to seconds by `normalizeBoard` so sorting never parses. */
-export type TimeField =
-  | 'totalTime'
-  | 'swimTime'
-  | 'transitionTime'
-  | 'bikeTime'
-  | 'runTime'
+/**
+ * Columns the table can sort by. 選手姓名 and T1+T2 are deliberately not
+ * sortable, so neither appears here — which is also why `secs` holds exactly
+ * these four.
+ */
+export type SortField = 'totalTime' | 'swimTime' | 'bikeTime' | 'runTime'
 
 /**
  * A row after `normalizeBoard`: rank and the merged transition column are derived,
@@ -50,15 +55,12 @@ export interface ViewAthlete extends Athlete {
   rank?: number
   /** `t1 + t2`, formatted for display; empty when the row has neither. */
   transitionTime: string
-  /** Every time column in seconds; missing/unparseable values are `Infinity` so they sort last. */
-  secs: Record<TimeField, number>
+  /** Sortable columns pre-parsed to seconds; missing/unparseable values are `Infinity` so they sort last. */
+  secs: Record<SortField, number>
 }
 
 export interface ViewBoard extends Omit<Board, 'athletes'> {
   athletes: ViewAthlete[]
 }
-
-/** Columns the table can sort by. */
-export type SortField = 'name' | TimeField
 
 export type SortDir = 'asc' | 'desc'

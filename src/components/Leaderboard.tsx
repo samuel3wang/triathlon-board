@@ -5,7 +5,7 @@ import './Leaderboard.css'
 const COL_COUNT = 8
 
 /**
- * Every column but 名字 is a time, and `normalizeBoard` already parsed those to
+ * Every sortable column is a time and `normalizeBoard` already parsed it to
  * seconds — so a compare here is a number compare, never a string parse.
  */
 const sortAthletes = (
@@ -16,15 +16,8 @@ const sortAthletes = (
   const field: SortField = sortField ?? 'totalTime'
   const dir: SortDir = sortField ? sortDir : 'asc'
   return [...list].sort((a, b) => {
-    let va: string | number
-    let vb: string | number
-    if (field === 'name') {
-      va = (a.name ?? '').toLowerCase()
-      vb = (b.name ?? '').toLowerCase()
-    } else {
-      va = a.secs[field]
-      vb = b.secs[field]
-    }
+    const va = a.secs[field]
+    const vb = b.secs[field]
     if (va < vb) return dir === 'asc' ? -1 : 1
     if (va > vb) return dir === 'asc' ? 1 : -1
     return 0
@@ -128,9 +121,7 @@ function Leaderboard({ data }: LeaderboardProps) {
           <thead>
             <tr>
               <th className="col-rank">排名</th>
-              <th className="col-name sortable" onClick={() => handleSort('name')}>
-                選手姓名{sortIcon('name')}
-              </th>
+              <th className="col-name">選手姓名</th>
               <th className="col-total sortable" onClick={() => handleSort('totalTime')}>
                 總成績{sortIcon('totalTime')}
               </th>
@@ -143,12 +134,7 @@ function Leaderboard({ data }: LeaderboardProps) {
               <th className="col-split col-run sortable" onClick={() => handleSort('runTime')}>
                 跑步{sortIcon('runTime')}
               </th>
-              <th
-                className="col-split col-transition sortable"
-                onClick={() => handleSort('transitionTime')}
-              >
-                T1+T2{sortIcon('transitionTime')}
-              </th>
+              <th className="col-split col-transition">T1+T2</th>
               <th className="col-race">賽會名稱</th>
 
             </tr>
