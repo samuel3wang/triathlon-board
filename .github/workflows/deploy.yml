@@ -21,19 +21,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # These majors all run on node24; v4/v3 ran on the now-deprecated node20.
-      - uses: actions/checkout@v7
+      # Rolled back to the exact versions of the last deploy that succeeded
+      # (581c589), to take them out of the picture while deploys are failing.
+      # They run on node20 and the runners now warn about that; re-bump to
+      # checkout@v7 / setup-node@v7 / upload-pages-artifact@v5 once Pages is
+      # deploying reliably again.
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # stamp-updated reads each data file's commit date
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run stamp
       - run: npm run build
-      # v4+ excludes dotfiles from the artifact; dist/ has none that matter.
-      - uses: actions/upload-pages-artifact@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
@@ -48,4 +51,4 @@ jobs:
       # `Math.min(input, 600000)`, so 10 minutes is a hard ceiling. If a deploy
       # overruns it, the deploy itself has to get faster — see CLAUDE.md.
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
