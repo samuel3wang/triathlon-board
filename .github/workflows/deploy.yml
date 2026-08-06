@@ -13,7 +13,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Never cancel a deployment that is already talking to Pages — a half-finished
+  # one leaves the site in a worse state than just waiting for it.
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -44,3 +46,7 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          # Pages has been taking 8-10 min per deploy since the custom domain
+          # was set, overrunning the 10 min default. Milliseconds.
+          timeout: 1800000
