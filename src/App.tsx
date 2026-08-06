@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
 import Leaderboard from './components/Leaderboard'
+import type { Board } from './types'
 import './App.css'
 
-const BOARDS = [
+interface BoardSource {
+  label: string
+  file: string
+}
+
+const BOARDS: BoardSource[] = [
   { label: '男子超鐵', file: 'data/2026-full-men.json' },
   { label: '女子超鐵', file: 'data/2026-full-women.json' },
   { label: '男子半超鐵', file: 'data/2026-half-men.json' },
@@ -12,13 +18,13 @@ const BOARDS = [
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<Board | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setLoading(true)
     fetch(import.meta.env.BASE_URL + BOARDS[activeIndex].file)
-      .then(res => res.json())
+      .then(res => res.json() as Promise<Board>)
       .then(json => {
         setData(json)
         setLoading(false)

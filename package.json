@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "stamp": "tsx scripts/stamp-updated.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,6 +17,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/node": "^26.1.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -22,6 +25,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "tsx": "^4.23.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0",
     "vite": "^8.0.10"
   }
 }

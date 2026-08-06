@@ -5,13 +5,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev      # dev server (Vite)
-npm run build    # production build to dist/
-npm run preview  # serve the built dist/
-npm run lint     # eslint
+npm run dev        # dev server (Vite)
+npm run typecheck  # tsc -b, no emit
+npm run build      # typecheck + production build to dist/
+npm run preview    # serve the built dist/
+npm run lint       # eslint
+npm run stamp      # rewrite each board's lastUpdated from git history (CI does this)
 ```
 
-There is no test suite and no TypeScript — plain JSX with ESLint (`eslint.config.js`, react-hooks + react-refresh).
+There is no test suite. TypeScript is `strict`, and Vite only strips types — `npm run build` runs `tsc -b` first, so type errors do fail the build. `tsconfig.app.json` covers `src/` (DOM libs), `tsconfig.node.json` covers `vite.config.ts` and `scripts/` (Node libs).
+
+**TypeScript is pinned to 6.x on purpose.** TS 7 (the native compiler) is released, but `typescript-eslint` does not support it yet and `npm run lint` hard-fails on TS 7. Revisit once typescript-eslint ships TS 7 support.
 
 ## What this is
 
@@ -30,15 +34,11 @@ All UI copy is Traditional Chinese.
 
 ### Data contract
 
-Board file shape:
+`src/types.ts` is the single source of truth for the board JSON shape (`Board`, `Athlete`). Nothing validates the JSON at runtime — the fetch is cast to `Board`, so a malformed data file is a runtime problem, not a compile-time one. Keep `src/types.ts` in step with `public/data/*.json` by hand.
 
-```json
-{ "title": "...", "subtitle": "...", "category": "male|female|kona",
-  "distance": "full|half", "lastUpdated": "YYYY-MM-DD",
-  "notes": ["..."], "athletes": [...] }
-```
+`t1`/`t2` are optional and render as `—` when absent (most historical rows have no transition splits). Some rows carry `birthYear` / `date`, which nothing displays yet.
 
-Athlete fields the table renders: `rank`, `name`, `totalTime`, `swimTime`, `t1`, `bikeTime`, `t2`, `runTime`, `raceName`. `t1`/`t2` are optional and render as `—` when absent (most existing rows have no splits for them). Some rows also carry `birthYear` / `date`, which nothing displays yet.
+`lastUpdated` is **not** maintained by hand. `scripts/stamp-updated.mjs` (run as `npm run stamp` in the deploy workflow, before `npm run build`) overwrites it with the date that data file was last committed, in `Asia/Taipei`. The value sitting in the repo is therefore cosmetic — only the dev server shows it. This is why the workflow checks out with `fetch-depth: 0`; a shallow clone has no per-file history and the stamp falls back to today.
 
 Two behaviours branch on `category === 'kona'`:
 

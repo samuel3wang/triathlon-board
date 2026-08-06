@@ -1,11 +1,19 @@
 import { Fragment, useState, useMemo } from 'react'
+import type { Athlete, Board, SortDir, SortField } from '../types'
 import './Leaderboard.css'
 
-const TIME_FIELDS = new Set(['totalTime', 'swimTime', 't1', 'bikeTime', 't2', 'runTime'])
+const TIME_FIELDS: ReadonlySet<SortField> = new Set<SortField>([
+  'totalTime',
+  'swimTime',
+  't1',
+  'bikeTime',
+  't2',
+  'runTime',
+])
 
 const COL_COUNT = 9
 
-const timeToSeconds = (t) => {
+const timeToSeconds = (t: string | undefined): number => {
   if (!t || typeof t !== 'string') return Infinity
   const parts = t.split(':').map(Number)
   if (parts.some(Number.isNaN)) return Infinity
@@ -14,18 +22,22 @@ const timeToSeconds = (t) => {
   return Infinity
 }
 
-const sortAthletes = (list, sortField, sortDir) => {
-  const field = sortField || 'totalTime'
-  const dir = sortField ? sortDir : 'asc'
+const sortAthletes = (
+  list: Athlete[],
+  sortField: SortField | null,
+  sortDir: SortDir
+): Athlete[] => {
+  const field: SortField = sortField ?? 'totalTime'
+  const dir: SortDir = sortField ? sortDir : 'asc'
   return [...list].sort((a, b) => {
-    let va = a[field]
-    let vb = b[field]
+    let va: string | number
+    let vb: string | number
     if (TIME_FIELDS.has(field)) {
-      va = timeToSeconds(va)
-      vb = timeToSeconds(vb)
+      va = timeToSeconds(a[field])
+      vb = timeToSeconds(b[field])
     } else {
-      if (typeof va === 'string') va = va.toLowerCase()
-      if (typeof vb === 'string') vb = vb.toLowerCase()
+      va = (a[field] ?? '').toLowerCase()
+      vb = (b[field] ?? '').toLowerCase()
     }
     if (va < vb) return dir === 'asc' ? -1 : 1
     if (va > vb) return dir === 'asc' ? 1 : -1
@@ -33,14 +45,23 @@ const sortAthletes = (list, sortField, sortDir) => {
   })
 }
 
-function Leaderboard({ data }) {
+interface Group {
+  label: string | null
+  rows: Athlete[]
+}
+
+interface LeaderboardProps {
+  data: Board
+}
+
+function Leaderboard({ data }: LeaderboardProps) {
   const [search, setSearch] = useState('')
-  const [sortField, setSortField] = useState(null)
-  const [sortDir, setSortDir] = useState('asc')
+  const [sortField, setSortField] = useState<SortField | null>(null)
+  const [sortDir, setSortDir] = useState<SortDir>('asc')
 
   const isKona = data.category === 'kona'
 
-  const { groups, totalCount } = useMemo(() => {
+  const { groups, totalCount } = useMemo<{ groups: Group[]; totalCount: number }>(() => {
     let list = data.athletes || []
     if (search.trim()) {
       const q = search.trim().toLowerCase()
@@ -71,7 +92,7 @@ function Leaderboard({ data }) {
     return { groups: [{ label: null, rows: sorted }], totalCount: sorted.length }
   }, [data.athletes, search, sortField, sortDir, isKona])
 
-  const handleSort = (field) => {
+  const handleSort = (field: SortField) => {
     if (sortField === field) {
       if (sortDir === 'asc') setSortDir('desc')
       else {
@@ -84,9 +105,9 @@ function Leaderboard({ data }) {
     }
   }
 
-  const sortIcon = (field) => {
-    if (sortField !== field) return ' \u2195'
-    return sortDir === 'asc' ? ' \u2191' : ' \u2193'
+  const sortIcon = (field: SortField): string => {
+    if (sortField !== field) return ' ↕'
+    return sortDir === 'asc' ? ' ↑' : ' ↓'
   }
 
   return (
@@ -156,7 +177,7 @@ function Leaderboard({ data }) {
                 )}
                 {group.rows.map((a, i) => {
                   const displayRank = isKona ? i + 1 : a.rank
-                  const isTop = displayRank <= 3
+                  const isTop = displayRank !== undefined && displayRank <= 3
                   return (
                     <tr key={`${gi}-${i}`} className={isTop ? `top-${displayRank}` : ''}>
                       <td className="col-rank">

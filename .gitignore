@@ -25,3 +25,6 @@ dist-ssr
 
 # Claude Code (personal settings only; CLAUDE.md and settings.json are shared)
 .claude/settings.local.json
+
+# TypeScript incremental build cache
+*.tsbuildinfo
