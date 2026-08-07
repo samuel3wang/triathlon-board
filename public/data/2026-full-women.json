@@ -23,7 +23,7 @@
       "swimTime": "01:18:29",
       "bikeTime": "04:58:15",
       "runTime": "03:29:34",
-      "raceName": "2023 Challenge Taiwan",
+      "raceName": "2023 ２",
       "t1": "00:06:51",
       "t2": "00:03:50",
       "verify": 1
@@ -140,14 +140,14 @@
     },
     {
       "name": "李秀如",
-      "totalTime": "11:14:59",
-      "swimTime": "01:34:57",
-      "bikeTime": "05:29:32",
-      "runTime": "04:02:02",
+      "totalTime": "11:14:58",
+      "swimTime": "01:35:02",
+      "bikeTime": "05:29:31",
+      "runTime": "04:01:58",
       "raceName": "2020 普悠瑪",
       "t1": "00:04:15",
       "t2": "00:04:12",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "羅紹萍",
@@ -196,13 +196,13 @@
     {
       "name": "陳玉玲",
       "totalTime": "11:37:34",
-      "swimTime": "01:34:22",
+      "swimTime": "01:34:29",
       "bikeTime": "05:38:52",
-      "runTime": "04:15:38",
+      "runTime": "04:15:32",
       "raceName": "2020 普悠瑪",
       "t1": "00:05:02",
       "t2": "00:03:39",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "李佳萱",
@@ -268,7 +268,7 @@
       "raceName": "2023 Challenge Taiwan",
       "t1": "00:08:39",
       "t2": "00:06:55",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "連雪涵",
@@ -284,13 +284,13 @@
     {
       "name": "陳明煥",
       "totalTime": "11:56:25",
-      "swimTime": "01:21:25",
-      "bikeTime": "06:08:47",
-      "runTime": "04:18:31",
+      "swimTime": "01:21:34",
+      "bikeTime": "06:08:46",
+      "runTime": "04:18:25",
       "raceName": "2020 普悠瑪",
       "t1": "00:04:34",
       "t2": "00:03:06",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "蘇瑋筑",
@@ -329,12 +329,12 @@
       "name": "李宜芳",
       "totalTime": "12:07:15",
       "swimTime": "01:25:03",
-      "bikeTime": "06:07:29",
-      "runTime": "04:22:45",
+      "bikeTime": "06:07:27",
+      "runTime": "04:22:42",
       "raceName": "2021 Challenge Taiwan",
       "t1": "00:08:01",
       "t2": "00:03:55",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "劉佳瑋",
@@ -411,7 +411,7 @@
       "raceName": "2023 Challenge Taiwan",
       "t1": "00:09:10",
       "t2": "00:07:31",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "陳薰伶",
@@ -438,13 +438,13 @@
     {
       "name": "蔡文雅",
       "totalTime": "12:27:11",
-      "swimTime": "01:51:20",
+      "swimTime": "01:51:27",
       "bikeTime": "06:15:31",
-      "runTime": "04:11:23",
+      "runTime": "04:11:18",
       "raceName": "2020 普悠瑪",
       "t1": "00:06:20",
       "t2": "00:02:35",
-      "verify": 0
+      "verify": 1
     }
   ]
 }
