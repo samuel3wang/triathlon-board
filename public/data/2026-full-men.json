@@ -4,7 +4,9 @@
   "category": "male",
   "distance": "full",
   "lastUpdated": "2026-08-05",
-  "notes": [""],
+  "notes": [
+    "以下賽事資訊可能有誤：CT 2024, CT 2017, CT 2014, Puyuma 2026, Puyuma 2025, Puyuma 2024, Puyuma 2017, 興·泉滴水湖大鐵 2025, 臺東超鐵 2012"
+  ],
   "athletes": [
     {
       "name": "張團畯",
@@ -100,7 +102,7 @@
       "swimTime": "01:05:29",
       "bikeTime": "04:34:02",
       "runTime": "03:25:02",
-      "raceName": "2026IM Canada-Ottawa",
+      "raceName": "2026 IM Canada-Ottawa",
       "t1": "00:03:05",
       "t2": "00:02:41",
       "verify": 1
