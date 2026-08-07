@@ -90,9 +90,9 @@
       "bikeTime": "04:39:30",
       "runTime": "03:15:17",
       "raceName": "2026 Challenge Taiwan",
-      "t1": "",
-      "t2": "",
-      "verify": 0
+      "t1": "00:06:19",
+      "t2": "00:02:58",
+      "verify": 1
     },
     {
       "name": "張邦晏",
@@ -123,9 +123,9 @@
       "bikeTime": "04:33:50",
       "runTime": "03:14:48",
       "raceName": "2026 Challenge Taiwan",
-      "t1": "",
-      "t2": "",
-      "verify": 0
+      "t1": "00:07:12",
+      "t2": "00:03:14",
+      "verify": 1
     },
     {
       "name": "楊茂雍",
@@ -167,9 +167,9 @@
       "bikeTime": "04:54:54",
       "runTime": "03:05:13",
       "raceName": "2026 Challenge Taiwan",
-      "t1": "",
-      "t2": "",
-      "verify": 0
+      "t1": "00:09:10",
+      "t2": "00:03:08",
+      "verify": 1
     },
     {
       "name": "廖斌宏",
@@ -310,9 +310,9 @@
       "bikeTime": "05:07:44",
       "runTime": "03:21:21",
       "raceName": "2026 Challenge Taiwan",
-      "t1": "",
-      "t2": "",
-      "verify": 0
+      "t1": "00:09:17",
+      "t2": "00:03:19",
+      "verify": 1
     },
     {
       "name": "林岳岡",
@@ -365,9 +365,9 @@
       "bikeTime": "04:47:49",
       "runTime": "03:35:06",
       "raceName": "2026 Challenge Taiwan",
-      "t1": "",
-      "t2": "",
-      "verify": 0
+      "t1": "00:08:54",
+      "t2": "00:06:55",
+      "verify": 1
     },
     {
       "name": "梁騰瑜",
