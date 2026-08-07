@@ -136,7 +136,7 @@
       "raceName": "2026 IM Penghu",
       "t1": "00:04:59",
       "t2": "00:02:45",
-      "verify": 0
+      "verify": 1
     },
     {
       "name": "李秀如",
@@ -155,7 +155,7 @@
       "swimTime": "01:29:08",
       "bikeTime": "05:32:30",
       "runTime": "03:58:35",
-      "raceName": "2026 IM Korea",
+      "raceName": "*2026 IM Korea",
       "t1": "00:08:38",
       "t2": "00:08:00",
       "verify": 0
@@ -241,12 +241,12 @@
       "name": "莊雅婷",
       "totalTime": "11:45:26",
       "swimTime": "01:32:55",
-      "bikeTime": "05:50:49",
+      "bikeTime": "05:50:48",
       "runTime": "04:09:25",
       "raceName": "2022 IM Taiwan",
-      "t1": "00:07:24",
-      "t2": "00:04:54",
-      "verify": 0
+      "t1": "00:07:23",
+      "t2": "00:04:53",
+      "verify": 1
     },
     {
       "name": "梁蘭麗",
