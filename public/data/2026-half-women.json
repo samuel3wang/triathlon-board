@@ -7,14 +7,25 @@
   "notes": [""],
   "athletes": [
     {
-      "name": "123",
-      "totalTime": "",
-      "swimTime": "",
-      "bikeTime": "",
-      "runTime": "",
-      "raceName": "",
-      "t1": "",
-      "t2": "",
+      "name": "張",
+      "totalTime": "1:00:00",
+      "swimTime": "00:00:33",
+      "bikeTime": "00:00:50",
+      "runTime": "00:00:05",
+      "raceName": "2026",
+      "t1": "00:00:02",
+      "t2": "00:00:00",
+      "verify": 0
+    },
+    {
+      "name": "張",
+      "totalTime": "1:00:00",
+      "swimTime": "00:00:33",
+      "bikeTime": "00:00:50",
+      "runTime": "00:00:05",
+      "raceName": "2026",
+      "t1": "00:00:02",
+      "t2": "00:00:00",
       "verify": 0
     }
   ]

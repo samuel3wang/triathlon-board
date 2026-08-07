@@ -4,7 +4,9 @@
   "category": "female",
   "distance": "full",
   "lastUpdated": "2026-06-16",
-  "notes": ["以下賽事資訊可能有誤：Puyuma 2026, Puyuma 2025, Puyuma 2024, 臺東超鐵 2022"],
+  "notes": [
+    "以下賽事資訊可能有誤：Puyuma 2026, Puyuma 2025, Puyuma 2024, 臺東超鐵 2022"
+  ],
   "athletes": [
     {
       "name": "李筱瑜",
@@ -23,7 +25,7 @@
       "swimTime": "01:18:29",
       "bikeTime": "04:58:15",
       "runTime": "03:29:34",
-      "raceName": "2023 ２",
+      "raceName": "2023 Challenge Taiwan",
       "t1": "00:06:51",
       "t2": "00:03:50",
       "verify": 1
