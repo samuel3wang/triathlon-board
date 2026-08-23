@@ -4,29 +4,73 @@
   "category": "female",
   "distance": "half",
   "lastUpdated": "2026-06-16",
-  "notes": [""],
+  "notes": ["以下賽事資訊可能有誤：Puyuma 2024"],
   "athletes": [
     {
-      "name": "張",
-      "totalTime": "1:00:00",
-      "swimTime": "00:00:33",
-      "bikeTime": "00:00:50",
-      "runTime": "00:00:05",
-      "raceName": "2026",
-      "t1": "00:00:02",
+      "name": "張嘉家",
+      "totalTime": "04:31:21",
+      "swimTime": "00:27:49",
+      "bikeTime": "02:22:56",
+      "runTime": "01:34:59",
+      "raceName": "2016 Ironman 70.3 合肥",
+      "t1": "00:02:54",
+      "t2": "00:02:35",
+      "verify": 1
+    },
+    {
+      "name": "楊宜靜",
+      "totalTime": "05:03:11",
+      "swimTime": "00:36:52",
+      "bikeTime": "02:38:16",
+      "runTime": "01:39:38",
+      "raceName": "2020 普悠瑪",
+      "t1": "00:02:46",
+      "t2": "00:05:35",
+      "verify": 1
+    },
+    {
+      "name": "簡微禎",
+      "totalTime": "05:16:41",
+      "swimTime": "00:33:35",
+      "bikeTime": "02:37:52",
+      "runTime": "01:52:00",
+      "raceName": "2024 普悠瑪",
+      "t1": "00:13:14",
       "t2": "00:00:00",
       "verify": 0
     },
     {
-      "name": "張",
-      "totalTime": "1:00:00",
-      "swimTime": "00:00:33",
-      "bikeTime": "00:00:50",
-      "runTime": "00:00:05",
-      "raceName": "2026",
-      "t1": "00:00:02",
-      "t2": "00:00:00",
-      "verify": 0
+      "name": "劉昀昕",
+      "totalTime": "05:26:59",
+      "swimTime": "00:44:49",
+      "bikeTime": "02:40:48",
+      "runTime": "01:46:34",
+      "raceName": "2026 普悠瑪",
+      "t1": "00:10:25",
+      "t2": "00:04:21",
+      "verify": 1
+    },
+    {
+      "name": "陳薰伶",
+      "totalTime": "05:27:53",
+      "swimTime": "00:42:53",
+      "bikeTime": "02:42:17",
+      "runTime": "01:52:29",
+      "raceName": "2023 普悠瑪",
+      "t1": "00:06:08",
+      "t2": "00:05:06",
+      "verify": 1
+    },
+    {
+      "name": "黃可欣",
+      "totalTime": "05:34:00",
+      "swimTime": "00:43:45",
+      "bikeTime": "02:42:11",
+      "runTime": "01:53:55",
+      "raceName": "2026 普悠瑪",
+      "t1": "00:10:04",
+      "t2": "00:04:02",
+      "verify": 1
     }
   ]
 }

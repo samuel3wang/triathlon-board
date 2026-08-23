@@ -4,9 +4,7 @@
   "category": "female",
   "distance": "full",
   "lastUpdated": "2026-06-16",
-  "notes": [
-    "以下賽事資訊可能有誤：Puyuma 2026, Puyuma 2025, Puyuma 2024, 臺東超鐵 2022"
-  ],
+  "notes": ["以下賽事資訊可能有誤：Puyuma 2025, Puyuma 2024, 臺東超鐵 2022"],
   "athletes": [
     {
       "name": "李筱瑜",
@@ -372,6 +370,17 @@
       "verify": 1
     },
     {
+      "name": "王乙玲",
+      "totalTime": "12:15:05",
+      "swimTime": "01:20:34",
+      "bikeTime": "06:11:18",
+      "runTime": "04:23:31",
+      "raceName": "2024 普悠瑪",
+      "t1": "00:19:42",
+      "t2": "00:00:00",
+      "verify": 0
+    },
+    {
       "name": "林亞姿",
       "totalTime": "12:15:23",
       "swimTime": "01:32:10",
@@ -416,6 +425,17 @@
       "verify": 1
     },
     {
+      "name": "郭霏",
+      "totalTime": "12:25:56",
+      "swimTime": "01:22:03",
+      "bikeTime": "06:12:46",
+      "runTime": "04:40:18",
+      "raceName": "2026 普悠瑪",
+      "t1": "00:05:18",
+      "t2": "00:05:31",
+      "verify": 1
+    },
+    {
       "name": "陳薰伶",
       "totalTime": "12:26:22",
       "swimTime": "01:29:20",
@@ -446,6 +466,17 @@
       "raceName": "2020 普悠瑪",
       "t1": "00:06:20",
       "t2": "00:02:35",
+      "verify": 1
+    },
+    {
+      "name": "朱如蘭",
+      "totalTime": "12:27:47",
+      "swimTime": "01:33:27",
+      "bikeTime": "06:23:30",
+      "runTime": "04:08:26",
+      "raceName": "2020 普悠瑪",
+      "t1": "00:14:25",
+      "t2": "00:07:57",
       "verify": 1
     }
   ]
