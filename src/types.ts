@@ -1,6 +1,6 @@
 /** Shape of the board JSON files served from `public/data/`. */
 
-export type Category = 'male' | 'female' | 'kona'
+export type Category = 'male' | 'female' | 'KONA'
 export type Distance = 'full' | 'half'
 export type Gender = 'male' | 'female'
 
@@ -16,7 +16,7 @@ export interface Athlete {
   bikeTime: string
   runTime: string
   raceName: string
-  /** Only meaningful on the Kona board, where rows are grouped by it. */
+  /** Only meaningful on the KONA board, where rows are grouped by it. */
   gender?: Gender
   /** Transitions, `""` when the source had none. Displayed summed as one T1+T2 column. */
   t1: string
@@ -51,7 +51,7 @@ export type SortField = 'totalTime' | 'swimTime' | 'bikeTime' | 'runTime'
  * never stored in the JSON.
  */
 export interface ViewAthlete extends Athlete {
-  /** Position by `totalTime`, ties sharing a rank. Undefined on the Kona board, which counts per gender group. */
+  /** Position by `totalTime`, ties sharing a rank. Undefined on the KONA board, which counts per gender group. */
   rank?: number
   /** `t1 + t2`, formatted for display; empty when the row has neither. */
   transitionTime: string

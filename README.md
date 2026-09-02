@@ -1,6 +1,6 @@
 # 臺灣超級鐵人三項排行榜
 
-Taiwan Triathlon Leaderboard — 收錄臺灣選手的超鐵（226km）、半超鐵（113km）歷代成績，以及完成 Kona 的選手名單。
+Taiwan Triathlon Leaderboard — 收錄臺灣選手的超鐵（226km）、半超鐵（113km）歷代成績，以及完成 KONA 的選手名單。
 
 **線上網址：** <https://triathlontw.com/>
 
@@ -46,7 +46,7 @@ npm run stamp      # 依 git 紀錄改寫各榜單的 lastUpdated（CI 會自動
 }
 ```
 
-（Kona 榜單多一個 `gender`，位置在 `raceName` 之後，值為 `"male"` / `"female"`。）
+（KONA 榜單多一個 `gender`，位置在 `raceName` 之後，值為 `"male"` / `"female"`。）
 
 幾個規則：
 
@@ -75,7 +75,7 @@ npm run stamp      # 依 git 紀錄改寫各榜單的 lastUpdated（CI 會自動
 }
 ```
 
-`category` 是 `'male' | 'female' | 'kona'`，`distance` 是 `'full' | 'half'`（Kona 榜單沒有）。`notes` 會顯示在表格下方的「備註」區塊。
+`category` 是 `'male' | 'female' | 'KONA'`，`distance` 是 `'full' | 'half'`（KONA 榜單沒有）。`notes` 會顯示在表格下方的「備註」區塊。
 
 ## 專案結構
 
@@ -102,7 +102,7 @@ scripts/stamp-updated.ts         改寫 lastUpdated
 
 `secondsToTime` 未滿一小時印 `M:SS`，滿一小時印 `H:MM:SS` — 所以 `t1: "3:30"` + `t2: "2:40"` 會顯示成 `6:10`。
 
-Kona 榜單（`category === 'kona'`）是唯一的分支：依 `athletes[].gender` 拆成 女子／男子 兩組、保持檔案順序、名次取自各組內的位置。`normalizeBoard` 刻意不排序 Kona 的列、也不給 `rank` — 那是一份完賽名單，不是一場比賽。
+KONA 榜單（`category === 'KONA'`）是唯一的分支：依 `athletes[].gender` 拆成 女子／男子 兩組、保持檔案順序、名次取自各組內的位置。`normalizeBoard` 刻意不排序 KONA 的列、也不給 `rank` — 那是一份完賽名單，不是一場比賽。
 
 ### 排序
 

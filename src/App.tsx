@@ -1,38 +1,38 @@
-import { useState, useEffect } from 'react'
-import Leaderboard from './components/Leaderboard'
-import { normalizeBoard } from './board'
-import type { Board, ViewBoard } from './types'
-import './App.css'
+import { useState, useEffect } from "react";
+import Leaderboard from "./components/Leaderboard";
+import { normalizeBoard } from "./board";
+import type { Board, ViewBoard } from "./types";
+import "./App.css";
 
 interface BoardSource {
-  label: string
-  file: string
+  label: string;
+  file: string;
 }
 
 const BOARDS: BoardSource[] = [
-  { label: '男子超鐵', file: 'data/2026-full-men.json' },
-  { label: '女子超鐵', file: 'data/2026-full-women.json' },
-  { label: '男子半超鐵', file: 'data/2026-half-men.json' },
-  { label: '女子半超鐵', file: 'data/2026-half-women.json' },
-  { label: '完成 Kona', file: 'data/2026-kona.json' },
-]
+  { label: "男子超鐵", file: "data/2026-full-men.json" },
+  { label: "女子超鐵", file: "data/2026-full-women.json" },
+  { label: "男子半超鐵", file: "data/2026-half-men.json" },
+  { label: "女子半超鐵", file: "data/2026-half-women.json" },
+  { label: "完成 KONA", file: "data/KONA.json" },
+];
 
 function App() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [data, setData] = useState<ViewBoard | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [data, setData] = useState<ViewBoard | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     fetch(import.meta.env.BASE_URL + BOARDS[activeIndex].file)
-      .then(res => res.json() as Promise<Board>)
-      .then(json => {
+      .then((res) => res.json() as Promise<Board>)
+      .then((json) => {
         // Ranks, T1+T2 and the parsed seconds are computed once, here — not on render.
-        setData(normalizeBoard(json))
-        setLoading(false)
+        setData(normalizeBoard(json));
+        setLoading(false);
       })
-      .catch(() => setLoading(false))
-  }, [activeIndex])
+      .catch(() => setLoading(false));
+  }, [activeIndex]);
 
   return (
     <div className="app">
@@ -55,7 +55,7 @@ function App() {
         {BOARDS.map((b, i) => (
           <button
             key={i}
-            className={`tab-btn ${i === activeIndex ? 'active' : ''}`}
+            className={`tab-btn ${i === activeIndex ? "active" : ""}`}
             onClick={() => setActiveIndex(i)}
           >
             {b.label}
@@ -77,12 +77,13 @@ function App() {
         <p>台灣超級鐵人三項排行榜 &copy; {new Date().getFullYear()}</p>
         <p className="footer-note">資料僅供參考，如有錯誤歡迎來信指正</p>
         <p className="footer-contact">
-          意見信箱 - <a href="mailto:a22410570@yahoo.com.tw">a22410570@yahoo.com.tw</a>
+          意見信箱 -{" "}
+          <a href="mailto:a22410570@yahoo.com.tw">a22410570@yahoo.com.tw</a>
         </p>
         <p className="footer-version">{__COMMIT_SHA__}</p>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

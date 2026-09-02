@@ -79,8 +79,8 @@ const assignRanks = (rows: ViewAthlete[]): void => {
 export const normalizeBoard = (raw: Board): ViewBoard => {
   const athletes = (raw.athletes ?? []).map(toViewAthlete)
 
-  if (raw.category === 'kona') {
-    // Kona is a finisher list, not a race: rank is the position within each
+  if (raw.category === 'KONA') {
+    // KONA is a finisher list, not a race: rank is the position within each
     // gender group, computed by the table. Leave file order alone.
     return { ...raw, athletes }
   }

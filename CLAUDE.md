@@ -19,7 +19,7 @@ There is no test suite. TypeScript is `strict`, and Vite only strips types — `
 
 ## What this is
 
-A static, data-only leaderboard for Taiwanese triathlon results (超鐵 226km / 半超鐵 113km / Kona finishers). There is no backend: every board is a JSON file under `public/data/`, fetched at runtime. New results arrive via a Google Form (linked from the header) and are hand-merged into those JSON files — most commits in this repo are exactly that (e.g. "update men 226 rank 21").
+A static, data-only leaderboard for Taiwanese triathlon results (超鐵 226km / 半超鐵 113km / KONA finishers). There is no backend: every board is a JSON file under `public/data/`, fetched at runtime. New results arrive via a Google Form (linked from the header) and are hand-merged into those JSON files — most commits in this repo are exactly that (e.g. "update men 226 rank 21").
 
 All UI copy is Traditional Chinese.
 
@@ -34,7 +34,7 @@ The site deploys to GitHub Pages (`.github/workflows/deploy.yml`, on push to `ma
 
 `vite.config.ts` therefore sets `base: './'`, so one build is correct in both places and moving between them needs no rebuild. An absolute base breaks every asset the moment the site moves — that failure mode cost a day once.
 
-**A red deploy job does not mean the site did not update.** `actions/deploy-pages` polls the Pages API every 5s and gives up after 10 minutes, and that ceiling is *not* configurable — the action clamps its own `timeout` input with `Math.min(input, 600000)`, so raising it is silently ignored. When Pages takes longer than that, the action reports failure and cancels, but the deployment often finishes on GitHub's side anyway a few minutes later and the content does go live. On 2026-08-06 a run whose job failed at 14:26 published at 14:29.
+**A red deploy job does not mean the site did not update.** `actions/deploy-pages` polls the Pages API every 5s and gives up after 10 minutes, and that ceiling is _not_ configurable — the action clamps its own `timeout` input with `Math.min(input, 600000)`, so raising it is silently ignored. When Pages takes longer than that, the action reports failure and cancels, but the deployment often finishes on GitHub's side anyway a few minutes later and the content does go live. On 2026-08-06 a run whose job failed at 14:26 published at 14:29.
 
 Because of that, `deploy-pages` runs with `continue-on-error: true` and a **Confirm the site is serving this commit** step decides the run instead: it polls the live site for up to 25 min and looks for this run's short sha inside the hashed JS bundle. Red now means the content genuinely never went live; green means it did, however long the action sulked. The same check by hand:
 
@@ -48,7 +48,7 @@ Deploys took ~12s until the custom domain was set on 2026-08-06, then 4-10 min, 
 
 The footer prints `__COMMIT_SHA__`, injected by `define` in `vite.config.ts` from `git rev-parse --short HEAD`. Read it to tell which commit a visitor is actually running: the Pages CDN caches HTML for 10 minutes (`max-age=600`, not configurable), so what a browser receives can lag what Environments → `github-pages` reports as Active. Because the sha ships inside the hashed JS, it can never disagree with the assets around it.
 
-Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_URL`, as `App.tsx` does; it compiles to `` fetch(`./` + file) ``, resolved against the page URL. A bare `/data/...` would 404 under the subpath. The one requirement a relative base adds is a trailing slash on the page URL — GitHub Pages 301s directory URLs to add it, and the app has no client-side router, so nested paths never arise.
+Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_URL`, as `App.tsx` does; it compiles to ``fetch(`./` + file)``, resolved against the page URL. A bare `/data/...` would 404 under the subpath. The one requirement a relative base adds is a trailing slash on the page URL — GitHub Pages 301s directory URLs to add it, and the app has no client-side router, so nested paths never arise.
 
 ### Data contract
 
@@ -64,14 +64,14 @@ Any runtime asset or data fetch **must** still go through `import.meta.env.BASE_
 
 `timeToSeconds` accepts `H:MM:SS`, `MM:SS`, or a bare number of seconds (`"90"` or `90`); anything else is `Infinity` and sorts last. `secondsToTime` prints `M:SS` under an hour, `H:MM:SS` at or above one — so `t1: "3:30"` + `t2: "2:40"` displays as `6:10`.
 
-**Every row in every file carries the same nine keys in the same order** — `name`, `totalTime`, `swimTime`, `bikeTime`, `runTime`, `raceName`, `t1`, `t2`, `verify` (plus `gender` on Kona rows, after `raceName`) — so adding an athlete is copy a row, paste it anywhere in the array, fill it in. Unknown values are `""`, not omitted; `t1: ""` renders exactly like a missing `t1` (`—`), so an incomplete row is safe.
+**Every row in every file carries the same nine keys in the same order** — `name`, `totalTime`, `swimTime`, `bikeTime`, `runTime`, `raceName`, `t1`, `t2`, `verify` (plus `gender` on KONA rows, after `raceName`) — so adding an athlete is copy a row, paste it anywhere in the array, fill it in. Unknown values are `""`, not omitted; `t1: ""` renders exactly like a missing `t1` (`—`), so an incomplete row is safe.
 
 `verify` is the maintainer's own bookkeeping and is never rendered: `0` on every new row, flipped to `1` by hand once that result has been checked against a source. Nothing in the app reads it.
 
 `lastUpdated` is **not** maintained by hand. `scripts/stamp-updated.ts` (run as `npm run stamp` in the deploy workflow, before `npm run build`) overwrites it with the date that data file was last committed, in `Asia/Taipei`. The value sitting in the repo is therefore cosmetic — only the dev server shows it, and `npm run stamp` fixes that locally too. This is why the workflow checks out with `fetch-depth: 0`; a shallow clone has no per-file history and the stamp falls back to today.
 
-One behaviour branches on `category === 'kona'`: those rows are split into 女子/男子 groups by an `athletes[].gender` field (`'female'`/`'male'`), keep their file order, and take their rank from the position within each group. `normalizeBoard` deliberately leaves Kona rows unsorted and their `rank` undefined — it is a finisher list, not a race.
+One behaviour branches on `category === 'KONA'`: those rows are split into 女子/男子 groups by an `athletes[].gender` field (`'female'`/`'male'`), keep their file order, and take their rank from the position within each group. `normalizeBoard` deliberately leaves KONA rows unsorted and their `rank` undefined — it is a finisher list, not a race.
 
 ### Sorting
 
-Only 總成績 / 游泳 / 自行車 / 跑步 are sortable — that set *is* `SortField`, and `secs` holds exactly those four. 排名, 選手姓名, T1+T2 and 賽會名稱 are deliberately not clickable. Every sort is therefore a numeric compare on `secs[field]`, never a string parse. Clicking a header cycles asc → desc → unsorted; unsorted means the `normalizeBoard` order, i.e. rank order. `COL_COUNT` is the `colSpan` for group-header rows and must be kept in sync with the number of `<th>` elements (currently 8: 排名 / 選手姓名 / 總成績 / 游泳 / 自行車 / 跑步 / T1+T2 / 賽會名稱, the same set on mobile and desktop).
+Only 總成績 / 游泳 / 自行車 / 跑步 are sortable — that set _is_ `SortField`, and `secs` holds exactly those four. 排名, 選手姓名, T1+T2 and 賽會名稱 are deliberately not clickable. Every sort is therefore a numeric compare on `secs[field]`, never a string parse. Clicking a header cycles asc → desc → unsorted; unsorted means the `normalizeBoard` order, i.e. rank order. `COL_COUNT` is the `colSpan` for group-header rows and must be kept in sync with the number of `<th>` elements (currently 8: 排名 / 選手姓名 / 總成績 / 游泳 / 自行車 / 跑步 / T1+T2 / 賽會名稱, the same set on mobile and desktop).
