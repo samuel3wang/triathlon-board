@@ -1,0 +1,46 @@
+/* KONA-only columns and the pinned 歷屆最速 rows; everything else comes from Leaderboard.css. */
+
+.col-year {
+  width: 7%;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+.col-note {
+  width: 25%;
+  font-size: 0.8rem;
+  color: var(--text);
+  opacity: 0.75;
+  white-space: normal;
+}
+
+.ranking-table tbody tr.record-header td {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.22), transparent);
+}
+
+.ranking-table tbody tr.record-row {
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.ranking-table tbody tr.record-row .col-name,
+.ranking-table tbody tr.record-row .col-note {
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* 最後更新底下再放一行說明，兩行都靠右對齊。 */
+.kona-board .board-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.kona-board .sort-note {
+  font-size: 0.8rem;
+  color: var(--text);
+  opacity: 0.6;
+  white-space: nowrap;
+}

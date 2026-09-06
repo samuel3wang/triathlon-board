@@ -15,9 +15,14 @@ export interface Athlete {
   swimTime: string
   bikeTime: string
   runTime: string
-  raceName: string
-  /** Only meaningful on the KONA board, where rows are grouped by it. */
+  /** Every board but KONA, where the year identifies the race instead. */
+  raceName?: string
+  /** Only meaningful on the KONA board, where it picks the two 歷屆最速 rows. */
   gender?: Gender
+  /** KONA only: the year of that KONA, which the board groups by. `""` elsewhere. */
+  year?: string
+  /** KONA only: free text shown in the 備註 column (e.g. `男子游泳最速`). `""` when there is none. */
+  note?: string
   /** Transitions, `""` when the source had none. Displayed summed as one T1+T2 column. */
   t1: string
   t2: string
@@ -59,8 +64,16 @@ export interface ViewAthlete extends Athlete {
   secs: Record<SortField, number>
 }
 
+/** KONA only: the all-time fastest finisher of each gender, pinned above the yearly sections. */
+export interface Fastest {
+  female?: ViewAthlete
+  male?: ViewAthlete
+}
+
 export interface ViewBoard extends Omit<Board, 'athletes'> {
   athletes: ViewAthlete[]
+  /** Only set on the KONA board. */
+  fastest?: Fastest
 }
 
 export type SortDir = 'asc' | 'desc'

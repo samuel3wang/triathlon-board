@@ -12,7 +12,7 @@
  *              numbers instead of re-parsing `H:MM:SS` strings on every compare.
  */
 
-import type { Board, ViewAthlete, ViewBoard } from './types'
+import type { Board, Fastest, ViewAthlete, ViewBoard } from './types'
 
 /**
  * Accepts `H:MM:SS`, `MM:SS`, or a bare number of seconds (`"90"` / `90`).
@@ -76,13 +76,35 @@ const assignRanks = (rows: ViewAthlete[]): void => {
   })
 }
 
+/**
+ * The single fastest finisher of each gender across every KONA in the file —
+ * the two rows the board pins above the yearly sections.
+ */
+const findFastest = (rows: ViewAthlete[]): Fastest => {
+  const best: Fastest = {}
+  for (const row of rows) {
+    if (!Number.isFinite(row.secs.totalTime)) continue
+    const g = row.gender
+    if (g !== 'female' && g !== 'male') continue
+    const held = best[g]
+    if (!held || row.secs.totalTime < held.secs.totalTime) best[g] = row
+  }
+  return best
+}
+
 export const normalizeBoard = (raw: Board): ViewBoard => {
   const athletes = (raw.athletes ?? []).map(toViewAthlete)
 
   if (raw.category === 'KONA') {
-    // KONA is a finisher list, not a race: rank is the position within each
-    // gender group, computed by the table. Leave file order alone.
-    return { ...raw, athletes }
+    // KONA is a finisher list, not a race: no overall rank. Rows are grouped by
+    // year, newest first, and ordered by total time inside a year regardless of
+    // gender — so a new finisher can still be appended anywhere in the file.
+    athletes.sort(
+      (a, b) =>
+        Number(b.year ?? 0) - Number(a.year ?? 0) ||
+        a.secs.totalTime - b.secs.totalTime,
+    )
+    return { ...raw, athletes, fastest: findFastest(athletes) }
   }
 
   // Array.prototype.sort is stable, so rows with identical times stay in file order.

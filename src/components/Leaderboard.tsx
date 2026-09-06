@@ -38,8 +38,6 @@ function Leaderboard({ data }: LeaderboardProps) {
   const [sortField, setSortField] = useState<SortField | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
-  const isKONA = data.category === "KONA";
-
   const { groups, totalCount } = useMemo<{
     groups: Group[];
     totalCount: number;
@@ -54,26 +52,12 @@ function Leaderboard({ data }: LeaderboardProps) {
       );
     }
 
-    if (isKONA) {
-      const women = list.filter((a) => a.gender === "female");
-      const men = list.filter((a) => a.gender === "male");
-      const sortedWomen = sortAthletes(women, sortField, sortDir);
-      const sortedMen = sortAthletes(men, sortField, sortDir);
-      return {
-        groups: [
-          { label: "女子", rows: sortedWomen },
-          { label: "男子", rows: sortedMen },
-        ],
-        totalCount: sortedWomen.length + sortedMen.length,
-      };
-    }
-
     const sorted = sortField ? sortAthletes(list, sortField, sortDir) : list;
     return {
       groups: [{ label: null, rows: sorted }],
       totalCount: sorted.length,
     };
-  }, [data.athletes, search, sortField, sortDir, isKONA]);
+  }, [data.athletes, search, sortField, sortDir]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -161,7 +145,7 @@ function Leaderboard({ data }: LeaderboardProps) {
                   </tr>
                 )}
                 {group.rows.map((a, i) => {
-                  const displayRank = isKONA ? i + 1 : a.rank;
+                  const displayRank = a.rank;
                   const isTop = displayRank !== undefined && displayRank <= 3;
                   return (
                     <tr

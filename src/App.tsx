@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Leaderboard from "./components/Leaderboard";
+import KonaBoard from "./components/KonaBoard";
 import { normalizeBoard } from "./board";
 import type { Board, ViewBoard } from "./types";
 import "./App.css";
@@ -67,7 +68,11 @@ function App() {
         {loading ? (
           <div className="loading">載入中...</div>
         ) : data ? (
-          <Leaderboard data={data} />
+          data.category === "KONA" ? (
+            <KonaBoard data={data} />
+          ) : (
+            <Leaderboard data={data} />
+          )
         ) : (
           <div className="loading">無法載入資料</div>
         )}

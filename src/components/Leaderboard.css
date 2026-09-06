@@ -71,8 +71,12 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* 每一欄都給固定的百分比寬度（八欄合計 100%），所以切換分頁時欄位標題不會隨
+   內容長短跳動，而且欄位是平均撐滿表格寬度、不會全部擠在左邊。
+   KONA 板的年度／備註兩欄在 KonaBoard.css 補上對應的百分比。 */
 .ranking-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.88rem;
   min-width: 900px;
@@ -144,7 +148,7 @@
 
 .col-rank {
   text-align: center;
-  width: 50px;
+  width: 7%;
 }
 
 .rank-badge {
@@ -174,11 +178,15 @@
 }
 
 .col-name {
+  width: 13%;
   font-weight: 600;
   color: var(--text-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .col-total {
+  width: 12%;
   font-family: var(--mono);
   font-weight: 700;
   color: var(--primary);
@@ -186,6 +194,7 @@
 }
 
 .col-split {
+  width: 11%;
   font-family: var(--mono);
   font-size: 0.82rem;
 }
@@ -203,6 +212,7 @@
 }
 
 .col-transition {
+  width: 10%;
   color: var(--text);
   opacity: 0.65;
 }
@@ -212,7 +222,7 @@
 }
 
 .col-race {
-  max-width: 220px;
+  width: 25%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
