@@ -14,7 +14,7 @@ const BOARDS: BoardSource[] = [
   { label: "女子超鐵", file: "data/2026-full-women.json" },
   { label: "男子半超鐵", file: "data/2026-half-men.json" },
   { label: "女子半超鐵", file: "data/2026-half-women.json" },
-  { label: "完成 KONA", file: "data/KONA.json" },
+  { label: "KONA 完賽榜", file: "data/KONA.json" },
 ];
 
 function App() {
