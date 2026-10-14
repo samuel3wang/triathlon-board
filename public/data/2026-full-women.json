@@ -23,7 +23,7 @@
       "swimTime": "01:16:05",
       "bikeTime": "04:47:55",
       "runTime": "03:33:58",
-      "raceName": "2026 IM GURYE KOREA",
+      "raceName": "2026 IM Gurye Korea",
       "t1": "00:03:45",
       "t2": "00:01:46",
       "verify": 1
@@ -217,13 +217,24 @@
     },
     {
       "name": "李淳潔",
-      "totalTime": "11:44:06",
-      "swimTime": "01:12:25",
-      "bikeTime": "06:35:09",
-      "runTime": "03:48:41",
-      "raceName": "2023 普悠瑪",
-      "t1": "00:03:36",
-      "t2": "00:04:15",
+      "totalTime": "11:23:52",
+      "swimTime": "01:14:13",
+      "bikeTime": "05:43:24",
+      "runTime": "04:11:21",
+      "raceName": "2026 IM World Championship",
+      "t1": "00:07:13",
+      "t2": "00:07:41",
+      "verify": 1
+    },
+    {
+      "name": "陳玟卉",
+      "totalTime": "11:39:03",
+      "swimTime": "01:24:22",
+      "bikeTime": "06:08:03",
+      "runTime": "03:57:23",
+      "raceName": "2026 IM Penghu",
+      "t1": "00:05:50",
+      "t2": "00:03:24",
       "verify": 1
     },
     {
@@ -315,6 +326,17 @@
       "verify": 1
     },
     {
+      "name": "陳依凡",
+      "totalTime": "11:58:56",
+      "swimTime": "01:19:47",
+      "bikeTime": "06:09:48",
+      "runTime": "04:11:53",
+      "raceName": "2026 IM Penghu",
+      "t1": "00:10:54",
+      "t2": "00:06:34",
+      "verify": 1
+    },
+    {
       "name": "邵子耘",
       "totalTime": "12:04:51",
       "swimTime": "01:28:52",
@@ -403,6 +425,28 @@
       "verify": 1
     },
     {
+      "name": "廖梓葳",
+      "totalTime": "12:21:03",
+      "swimTime": "01:16:27",
+      "bikeTime": "06:25:22",
+      "runTime": "04:26:37",
+      "raceName": "2026 IM Penghu",
+      "t1": "00:07:31",
+      "t2": "00:05:06",
+      "verify": 1
+    },
+    {
+      "name": "廖健妤",
+      "totalTime": "12:21:43",
+      "swimTime": "01:13:13",
+      "bikeTime": "06:47:02",
+      "runTime": "04:09:14",
+      "raceName": "2026 IM Penghu",
+      "t1": "00:05:27",
+      "t2": "00:06:47",
+      "verify": 1
+    },
+    {
       "name": "趙瑞娟",
       "totalTime": "12:23:43",
       "swimTime": "01:39:48",
@@ -430,7 +474,7 @@
       "swimTime": "01:22:03",
       "bikeTime": "06:12:46",
       "runTime": "04:40:18",
-      "raceName": "2026 普悠瑪",
+      "raceName": "2026 IM Vietnam",
       "t1": "00:05:18",
       "t2": "00:05:31",
       "verify": 1
@@ -444,17 +488,6 @@
       "raceName": "2026 普悠瑪",
       "t1": "00:12:47",
       "t2": "00:07:02",
-      "verify": 1
-    },
-    {
-      "name": "廖健妤",
-      "totalTime": "12:26:49",
-      "swimTime": "01:26:06",
-      "bikeTime": "06:17:17",
-      "runTime": "04:24:09",
-      "raceName": "2023 普悠瑪",
-      "t1": "00:08:52",
-      "t2": "00:10:25",
       "verify": 1
     },
     {
