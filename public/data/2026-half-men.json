@@ -51,6 +51,17 @@
       "verify": 0
     },
     {
+      "name": "張家翰",
+      "totalTime": "04:46:48",
+      "swimTime": "00:36:59",
+      "bikeTime": "02:23:15",
+      "runTime": "01:38:28",
+      "raceName": "2025 普悠瑪",
+      "t1": "00:05:37",
+      "t2": "00:02:26",
+      "verify": 1
+    },
+    {
       "name": "李彥廷",
       "totalTime": "04:46:52",
       "swimTime": "00:35:16",
@@ -180,6 +191,17 @@
       "raceName": "2026 Challenge Taiwan",
       "t1": "00:06:13",
       "t2": "00:03:10",
+      "verify": 1
+    },
+    {
+      "name": "畢譯文",
+      "totalTime": "04:55:44",
+      "swimTime": "00:38:03",
+      "bikeTime": "02:31:20",
+      "runTime": "01:42:25",
+      "raceName": "2024 臺東巴歌浪",
+      "t1": "00:03:56",
+      "t2": "00:00:00",
       "verify": 1
     }
   ]
