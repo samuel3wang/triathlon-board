@@ -75,3 +75,36 @@ One behaviour branches on `category === 'KONA'`: those rows are split into 女�
 ### Sorting
 
 Only 總成績 / 游泳 / 自行車 / 跑步 are sortable — that set _is_ `SortField`, and `secs` holds exactly those four. 排名, 選手姓名, T1+T2 and 賽會名稱 are deliberately not clickable. Every sort is therefore a numeric compare on `secs[field]`, never a string parse. Clicking a header cycles asc → desc → unsorted; unsorted means the `normalizeBoard` order, i.e. rank order. `COL_COUNT` is the `colSpan` for group-header rows and must be kept in sync with the number of `<th>` elements (currently 8: 排名 / 選手姓名 / 總成績 / 游泳 / 自行車 / 跑步 / T1+T2 / 賽會名稱, the same set on mobile and desktop).
+
+## 併入 temp.json 成績
+
+當使用者要把 `temp.json` 的成績併入榜單時，照以下流程執行。使用者沒指定榜單時，先問目標檔案。
+
+把 public/data/temp.json 的資料併入 public/data/<目標榜單>.json，完成後依 totalTime 由快到慢排序。
+
+來源格式：temp.json 是純文字，不是 JSON。每位選手一個區塊，區塊間空一行，依序為：
+姓名 / 總成績 / 游泳 / 自行車 / 跑步 / 比賽：賽事名稱
+
+填寫規則：
+
+- verify 填 0
+- t1 = total - swim - bike - run，t2 填 00:00:00
+- 不知道的欄位填 ""，不要省略
+- 時間統一成 HH:MM:SS，例如 4:01:30 → 04:01:30
+- 賽事名稱去掉「比賽：」前綴和前後空白，其餘照原文
+- 姓名去掉 \* 等註記符號
+
+異常處理：
+
+- 已在榜上的選手：不新增、不覆蓋舊資料；若成績不同，列出差異
+- 同一人在 temp.json 有多筆：先全部放入，並列出來讓我決定
+- 成績格式不完整：該欄留空，不要猜
+- 算不出 t1，或 t1 為負數：t1、t2 都留空
+- 成績看起來有誤但格式正確（例如 t1 小於 1 分鐘）：照原始資料填入，並列出來讓我查核
+- temp.json 的順序不對沒關係：不用列出，寫入後會依 totalTime 排序
+
+寫入要求：
+
+- 只改 athletes 陣列，不動其他欄位和既有格式
+- 不修改 temp.json，不要 commit
+- 完成後確認 JSON 可解析、每筆欄位順序一致、既有資料內容沒變、排序正確，再執行 npm run typecheck
