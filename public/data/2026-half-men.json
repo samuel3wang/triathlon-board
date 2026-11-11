@@ -40,6 +40,17 @@
       "verify": 1
     },
     {
+      "name": "張家豪",
+      "totalTime": "04:01:30",
+      "swimTime": "00:25:49",
+      "bikeTime": "02:10:36",
+      "runTime": "01:16:50",
+      "raceName": "2026 Challenge Xiamen",
+      "t1": "00:03:28",
+      "t2": "00:01:19",
+      "verify": 1
+    },
+    {
       "name": "謝昇諺",
       "totalTime": "04:00:04",
       "swimTime": "00:24:23",
@@ -47,17 +58,6 @@
       "runTime": "01:26:12",
       "raceName": "2019 IM70.3 上海崇明",
       "t1": "00:05:05",
-      "t2": "00:00:00",
-      "verify": 0
-    },
-    {
-      "name": "張家豪",
-      "totalTime": "04:01:30",
-      "swimTime": "00:25:39",
-      "bikeTime": "02:10:38",
-      "runTime": "01:17:35",
-      "raceName": "2025 Challenge Taiwan",
-      "t1": "00:07:38",
       "t2": "00:00:00",
       "verify": 0
     },
@@ -830,116 +830,6 @@
       "t1": "00:11:48",
       "t2": "00:00:00",
       "verify": 0
-    },
-    {
-      "name": "方柏喬",
-      "totalTime": "04:50:35",
-      "swimTime": "00:36:19",
-      "bikeTime": "02:23:23",
-      "runTime": "01:40:33",
-      "raceName": "2023 Ironman 70.3 Duisburg",
-      "t1": "00:05:47",
-      "t2": "00:04:33",
-      "verify": 1
-    },
-    {
-      "name": "蔡承達",
-      "totalTime": "04:51:17",
-      "swimTime": "00:40:26",
-      "bikeTime": "02:24:53",
-      "runTime": "01:32:52",
-      "raceName": "2026 普悠瑪",
-      "t1": "00:09:15",
-      "t2": "00:03:49",
-      "verify": 1
-    },
-    {
-      "name": "陳治嘉",
-      "totalTime": "04:51:56",
-      "swimTime": "00:38:11",
-      "bikeTime": "02:26:23",
-      "runTime": "01:39:43",
-      "raceName": "2026 Challenge Taiwan",
-      "t1": "00:05:51",
-      "t2": "00:01:44",
-      "verify": 1
-    },
-    {
-      "name": "李世烽",
-      "totalTime": "04:54:22",
-      "swimTime": "00:44:05",
-      "bikeTime": "02:18:19",
-      "runTime": "01:40:26",
-      "raceName": "2026 Challenge Taiwan",
-      "t1": "00:07:53",
-      "t2": "00:03:38",
-      "verify": 1
-    },
-    {
-      "name": "周佑蔚",
-      "totalTime": "04:54:39",
-      "swimTime": "00:37:24",
-      "bikeTime": "02:21:53",
-      "runTime": "01:46:18",
-      "raceName": "2025 普悠瑪",
-      "t1": "00:09:04",
-      "t2": "00:00:00",
-      "verify": 0
-    },
-    {
-      "name": "洪傳智",
-      "totalTime": "04:54:52",
-      "swimTime": "00:32:14",
-      "bikeTime": "02:35:27",
-      "runTime": "01:36:22",
-      "raceName": "2026 普悠瑪",
-      "t1": "00:07:22",
-      "t2": "00:03:25",
-      "verify": 1
-    },
-    {
-      "name": "畢譯文",
-      "totalTime": "04:55:44",
-      "swimTime": "00:38:03",
-      "bikeTime": "02:31:20",
-      "runTime": "01:42:25",
-      "raceName": "2024 臺東巴歌浪",
-      "t1": "00:03:56",
-      "t2": "00:00:00",
-      "verify": 1
-    },
-    {
-      "name": "鄭凱仁",
-      "totalTime": "04:56:38",
-      "swimTime": "00:34:12",
-      "bikeTime": "02:31:00",
-      "runTime": "01:42:05",
-      "raceName": "2025 普悠瑪",
-      "t1": "00:09:21",
-      "t2": "00:00:00",
-      "verify": 0
-    },
-    {
-      "name": "李鴻斌",
-      "totalTime": "04:56:46",
-      "swimTime": "00:42:57",
-      "bikeTime": "02:27:46",
-      "runTime": "01:38:30",
-      "raceName": "2023 Challenge Slovakia Samorin",
-      "t1": "00:04:48",
-      "t2": "00:02:47",
-      "verify": 1
-    },
-    {
-      "name": "王言晞",
-      "totalTime": "04:58:52",
-      "swimTime": "00:35:20",
-      "bikeTime": "02:33:33",
-      "runTime": "01:39:26",
-      "raceName": "2026 普悠瑪",
-      "t1": "00:07:53",
-      "t2": "00:02:38",
-      "verify": 1
     }
   ]
 }
